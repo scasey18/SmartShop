@@ -4,8 +4,10 @@
 
 
 <head>
-    <link rel="stylesheet" href="background_styles.css">
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="background_styles.css">-->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/background_styles.css') }}">
+    <!--<link rel="stylesheet" href="styles.css">-->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
     <script src="script.js" defer></script>
 
 
@@ -22,7 +24,7 @@
         <div class="navbar-selection">
             <ul>
                 <!--The # is a placeholder until we connect each of the pages together-->
-                <li><a href="#">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="#">Store</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
