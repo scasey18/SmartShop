@@ -1,30 +1,19 @@
-<!DOCTYPE html>
+{%  extends "base.html" %}
+{%  block title %}Login Page{%    endblock    %}
+{%  block content   %}
 
-<html lang="en">
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <!--<link rel="stylesheet" href="background_styles.css">
 <link rel="stylesheet" href="loginstyle.css">-->
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/loginstyle.css') }}">
+ <link rel="stylesheet" href="{{ url_for('static',filename='styles/loginstyle.css') }}">
 <link rel="stylesheet" href="{{ url_for('static',filename='styles/background_styles.css') }}">
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}">
-
-<head>
-
-    <title>Login Page</title>
-
-</head>
-
-<body>
-
-    <body>
-        <!--These classes are going to be used when we do styling and when we call from javascript-->
-        <nav class="navbar">
+ <link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}" >
+ <!-- <link rel="stylesheet" href="{{ url_for('static',filename='styles/login_form.css') }}">
+         <!-- These classes are going to be used when we do styling and when we call from javascript  -->
+         <nav class="navbar">
             <div class="logo">Shop Smart</div>
             <div class="navbar-selection">
                 <ul>
-                    <!--The # is a placeholder until we connect each of the pages together-->
+
                     <li><a href="/home">Home</a></li>
                     <li><a href="#">Store</a></li>
                     <li><a href="#">About</a></li>
@@ -33,22 +22,14 @@
                 </ul>
             </div>
         </nav>
-
-
-
-
         <form class="square" action="index.html" method="post">
-
             <h1>Login</h1>
-
             <input type="text" name="" placeholder="Username">
             <input type="text" name="" placeholder="Passphrase">
             <input type="submit" name="" value="Submit">
             <button onclick="window.location.href='register.html';">Register</button>
-
         </form>
-
-    </body>
-
-
 </html>
+
+
+{%  endblock    %}
