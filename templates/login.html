@@ -1,54 +1,92 @@
-<!DOCTYPE html>
+{%  extends "base.html" %}
+{%  block title %}Login Page{%    endblock    %}
 
-<html lang="en">
+{% block css %}
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<!--<link rel="stylesheet" href="background_styles.css">
-<link rel="stylesheet" href="loginstyle.css">-->
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/loginstyle.css') }}">
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/background_styles.css') }}">
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}">
+<style type="text/css">
+.bg{
+     background-image: url("static/images/loginBackground.jpg");
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+}
 
-<head>
+.form-container  {
+position: absolute;;
+top: 200px;
+background: #fff;
+margin: auto;
+padding: 40px;
+border-radius: 25px;
+box-shadow: 10px 10px 20px 0px   #000;
+}
+</style>
+{% endblock %}
 
-    <title>Login Page</title>
+{%  block content   %}
 
-</head>
-
-<body>
-
-    <body>
-        <!--These classes are going to be used when we do styling and when we call from javascript-->
-        <nav class="navbar">
-            <div class="logo">Shop Smart</div>
-            <div class="navbar-selection">
-                <ul>
-                    <!--The # is a placeholder until we connect each of the pages together-->
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="#">Store</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Account</a></li>
-                </ul>
+<section class="container-fluid bg" >
+    <section class="row justify-content-center">
+        <section class="col-12 col-sm-6 col-md-3">
+            <form class="form-container">
+                <h1 class="card-header bg-info text-center py-3 my-3 ">ShopSmart</h1>
+                <h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="*******" required>
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox">
+                    <label class="form-check-label" for="checkbox">Keep me signed in</label>
+                </div>
+                <button type="submit"  class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Submit</button>
+                <a href="#">Forgot pasword</a>
+                <p>Don't have an account?  <a href="#">Signup here</a></p>
+                <div class="panel-footer text-right">
+                <small>&copy; ShopSmart</small>
             </div>
-        </nav>
+            </form>
+        </section>
+    </section>
+</section>
 
+<!-- <section class="Form my-4 mx-5">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-5">
+                        <img src="{{url_for('static',filename='images/defaultHome.PNG')}}" class="img-fluid" alt="">
+                <div class="col-lg-7">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="email"  class="form-control" placeholder="Email-Address">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="password"  class="form-control" placeholder="******">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <button type="button" class="btn1" name="button">Login</button>
+                            </div>
+                        </div>
+                           <a href="#">Forgot pasword</a>
+                           <p>Don't have an account?  <a href="#">Register here</a></p>
+                    </form>
+                </div>
+            </div>
 
+        </div>
 
+    </div>
 
-        <form class="square" action="index.html" method="post">
+</section> -->
 
-            <h1>Login</h1>
-
-            <input type="text" name="" placeholder="Username">
-            <input type="text" name="" placeholder="Passphrase">
-            <input type="submit" name="" value="Submit">
-            <button onclick="window.location.href='register.html';">Register</button>
-
-        </form>
-
-    </body>
-
-
-</html>
+{%  endblock    %}
