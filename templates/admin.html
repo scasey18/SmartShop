@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+	<title>Admin Page</title>
+	<script src="{{ url_for('static',filename='js/admin.js') }}"></script>
+   </head>
+   <body>
+      <h3>All Customers</h3>
+	  <div id="custForm">
+		<form id = 'AddCustForm' action='{{ request.path }}' method='post' hidden=true>
+			<label>First name:</label><br>
+			<input name='fname' type='text'><br>
+			<label>Last name:</label><br>
+			<input name='lname' type='text'><br>
+			<label>Email:</label><br>
+			<input name='email' type='text'><br>
+			<label>Password:</label><br>
+			<input name='pwd' type='text'><br>
+			<input type='submit' value='Submit'>
+		</form>
+	  <button id="AddCustButton" onclick="showCustForm()">Add Customer</button>
+	  </div>
+      <table>
+         <thead>
+            <tr>
+               <th>custID</th>
+               <th>Name</th>
+               <th>Email</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for cust in customer %}
+               <tr>
+                  <td>{{ cust.custID }}</td>
+                  <td>{{ cust.fName }} {{cust.lName}}</td>
+                  <td>{{ cust.emailAdr }}</td>
+				  <td><input type="submit" name="removeCust" value={{ cust.custID }}>Remove</input></td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+	  <h3>Products</h3>
+	  <button id="AddProd">Add Product</button>
+	  <table>
+         <thead>
+            <tr>
+               <th>ProdID</th>
+               <th>Name</th>
+               <th>Price</th>
+			   <th>Stock</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for prod in products %}
+               <tr>
+                  <td>{{ prod.prodID }}</td>
+                  <td>{{ prod.name }}</td>
+                  <td>{{ prod.price }}</td>
+				  <td>{{ prod.curinv }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </body>
+</html>
