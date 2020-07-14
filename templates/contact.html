@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Contact Us{% endblock %} {% block css %}
+
+<style>
+    .about-section {
+        padding: 50px;
+        text-align: center;
+        color: black;
+    }
+    
+    .container {
+        padding: 0 16px;
+    }
+    
+    .container::after,
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    
+    .title {
+        color: grey;
+    }
+    
+    .productImage {
+        align-content: center;
+        border-radius: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    
+    body {
+        background-image: url("static/images/loginBackground.jpg");
+        width: 100%;
+        height: 100vh;
+        background-size: 100%;
+    }
+</style>
+{% endblock %} {% block content %}
+
+<div class="about-section">
+    <h1 style="text-align: center;"><b>Contact Us</b></h1>
+    <h4>
+        <br>
+        <p style="text-align: center"><b>Questions</b> or <b>Inquirires?</b>
+
+        </p>
+        <p>Feel free to reach us at <b>shopsmart123@gmail.com</b></p>
+        <p>to get in touch with our support team.</p>
+        <p><em>(Support agents available 24/7, 7 days a week!)</em></p>
+    </h4>
+</div>
+<div class="contactpic">
+    <img class="productImage" src="static/images/thinking.jpg">
+    <style>
+
+    </style>
+</div>
+
+{% endblock %}
