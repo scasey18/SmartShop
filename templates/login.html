@@ -37,12 +37,12 @@
 
 
 
-        <form class="square" action="index.html" method="post">
+        <form class="square" action='{{ request.path }}' method="post">
 
             <h1>Login</h1>
 
-            <input type="text" name="" placeholder="Username">
-            <input type="text" name="" placeholder="Passphrase">
+            <input type="text" name="uname" placeholder="Username">
+            <input type="text" name="pwd" placeholder="Passphrase">
             <input type="submit" name="" value="Submit">
             <button onclick="window.location.href='register.html';">Register</button>
 
