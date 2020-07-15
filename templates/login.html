@@ -1,7 +1,7 @@
 {%  extends "base.html" %}
-{%  block title %}Login Page{%    endblock    %}
+{%  block title %}Login{%    endblock    %}
 
-{% block css %}
+{% block styles %}
 
 <style type="text/css">
 .bg{
@@ -20,6 +20,11 @@ padding: 40px;
 border-radius: 25px;
 box-shadow: 10px 10px 20px 0px   #000;
 }
+.logo{
+    font-style: italic;
+    font-family: cursive;
+
+}
 </style>
 {% endblock %}
 
@@ -29,7 +34,7 @@ box-shadow: 10px 10px 20px 0px   #000;
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
             <form class="form-container">
-                <h1 class="card-header bg-info text-center py-3 my-3 ">ShopSmart</h1>
+                <h1 class="card-header bg-info text-center py-3 my-3 logo">ShopSmart</h1>
                 <h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
                   <div class="form-group">
                     <label for="email">Email address</label>
@@ -46,7 +51,7 @@ box-shadow: 10px 10px 20px 0px   #000;
                 </div>
                 <button type="submit"  class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Submit</button>
                 <a href="#">Forgot pasword</a>
-                <p>Don't have an account?  <a href="#">Signup here</a></p>
+                <p>Don't have an account?  <a href="/signup">Signup here</a></p>
                 <div class="panel-footer text-right">
                 <small>&copy; ShopSmart</small>
             </div>

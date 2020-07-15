@@ -24,5 +24,25 @@ def getCart():
     return render_template('cart.html')
 
 
+@app.route('/thankyou')
+def signup_thankyou():
+    return render_template('signup_thankyou.html')
+
+
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+
+@app.route('/thank_you')
+def sales_thankyou():
+    return render_template('sales_thankyou.html')
+
+
+@app.route('/product')
+def product():
+    return render_template('product.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
