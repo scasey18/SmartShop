@@ -1,0 +1,130 @@
+{%  extends "base.html" %}
+{%  block title %}Product{%    endblock    %}
+
+{% block styles %}
+<style type="text/css">
+
+body{
+       background-image: url("static/images/loginBackground.jpg");
+       background-size: 100%;
+}
+
+.bg{
+    width: 100%;
+    height: 100vh;
+
+}
+.smrt{
+    margin-bottom: 40px;
+    font-style: italic;
+}
+.kg{
+top: 200vh;
+background: #fff;
+margin-top: 40px;
+padding: 20px;
+border-radius: 25px;
+box-shadow: 10px 10px 20px 0px   #000;
+}
+</style>
+{% endblock %}
+
+{%  block content   %}
+
+<div class="container-fluid bg">
+  <div class="container mt-5 kg">
+<h2 class="text-center mb-5 smrt">ShopSmart</h2>
+  <div class="container ">
+    <div class="row">
+      <div class="col-md-6">
+          <img src="static/images/img_3.jpeg" class="d-block w-100" alt="...">
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+
+          </div>
+          <div class="row">
+            <h1><i class="fas fa-dollar-sign"></i>50</h1>&nbsp;&nbsp;<h3><span style="color:red;"><del>75</del></span>
+            </h3>&nbsp;&nbsp;
+            <h2 class="text-success">25% off <span style="color: black; font-weight: bold;">& free shipping</span> </h2>
+          </div>
+          <div class="row">
+            <h3 class="text-warning">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+            </h3>&nbsp;&nbsp;
+
+          </div>
+          <div class="row">
+            <p><i class="text-success far fa-check-square"></i><strong>&nbsp;A potty trained
+                puppy</strong>&nbsp;20%
+              Instant Discount on Debit
+              Cards purchases</p>
+            <p><i class="text-success far fa-check-square"></i><strong>&nbsp;&nbsp;Poppy is not over
+                weight</strong>&nbsp;5%
+              cashback on all credit card purchases
+              Cards</p>
+            <p><i class="text-success far fa-check-square"></i><strong>&nbsp;&nbsp;Poppy can provides emotional
+                supports</strong>&nbsp;extra
+              &nbsp;5% discount for students
+
+            </p>
+            <p><i class="text-success far fa-check-square"></i><strong>&nbsp;&nbsp; vote best puppy by the
+                vets</strong>&nbsp;&nbsp;20%
+              Instant Discount on pay with <i class="fab fa-google-wallet"></i>
+              google wallet</p>
+          </div>
+          <div class="row mt-4">
+            <h3 class="text-info"><i class="fas fa-map-marker-alt"></i></h3>
+            <p style="font-size: 20px;">&nbsp; Delivery by July 23, Tuesday | &nbsp; <span
+                class="text-success">FREE</span>
+            </p>
+          </div>
+      </div>
+
+</div>
+</div>
+<div class="container mb-5">
+    <div class="row">
+      <h2 class="my-5">Ratings & Reviews</h2>
+    </div>
+    <div class="row mb-5">
+      <div class="media">
+        <img class="mr-3" src="static/images/img_5.jpeg" alt="Generic placeholder" width="50">
+        <div class="media-body">
+          <h5 class="mt-0">Very sweet Puppy. <span class="text-warning"><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
+                class="far fa-star"></i></span></h5>
+
+          <p>Bootstrsap really does make learning web application fun and easy.
+               And this poppy is just so adorable and sweet</p>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <h2>Post Your Own Reviews</h2>
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputtextarea">Reviews</label>
+        <textarea type="text" class="form-control" id="exampleInputtextarea" placeholder="Write your Reviews"
+          rows="4"></textarea>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Submit Review</button>
+    </form>
+  </div>
+</div>
+ </div>
+</html>
+{%  endblock    %}
