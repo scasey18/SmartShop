@@ -1,7 +1,7 @@
 {%  extends "base.html" %}
-{%  block title %}Signup Page{%    endblock    %}
+{%  block title %}Signup{%    endblock    %}
 
-{% block css %}
+{% block styles %}
 
 <style type="text/css">
 .bg{
@@ -20,6 +20,11 @@ padding: 40px;
 border-radius: 25px;
 box-shadow: 10px 10px 20px 0px   #000;
 }
+.logo{
+    font-style: italic;
+    font-family: cursive;
+
+}
 </style>
 
 {% endblock %}
@@ -32,7 +37,7 @@ box-shadow: 10px 10px 20px 0px   #000;
             <form class="form-container" oninput='confirmPasscode.setCustomValidity(confirmPasscode.value != passcode.value ?
                 "Passwords do not match." :
                 "")'>
-                <h1 class="card-header bg-info text-center py-3 my-3 ">ShopSmart</h1>
+                <h1 class="card-header bg-info text-center py-3 my-3 logo ">ShopSmart</h1>
                 <h4 class="card-header bg-info text-center py-3 my-3">Sign up</h4>
 
                 <div class="form-row">
