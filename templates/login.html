@@ -33,17 +33,17 @@ box-shadow: 10px 10px 20px 0px   #000;
 <section class="container-fluid bg" >
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
-            <form class="form-container">
+            <form class="form-container" action='{{ request.path }}' method="post">
                 <h1 class="card-header bg-info text-center py-3 my-3 logo">ShopSmart</h1>
                 <h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
                   <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>
+                    <input name="uname" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="*******" required>
+                    <input name="pwd" type="password" class="form-control" id="password" placeholder="*******" required>
                   </div>
                   <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="checkbox">
@@ -59,39 +59,5 @@ box-shadow: 10px 10px 20px 0px   #000;
         </section>
     </section>
 </section>
-
-<!-- <section class="Form my-4 mx-5">
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-lg-5">
-                        <img src="{{url_for('static',filename='images/defaultHome.PNG')}}" class="img-fluid" alt="">
-                <div class="col-lg-7">
-                    <form>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <input type="email"  class="form-control" placeholder="Email-Address">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <input type="password"  class="form-control" placeholder="******">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <button type="button" class="btn1" name="button">Login</button>
-                            </div>
-                        </div>
-                           <a href="#">Forgot pasword</a>
-                           <p>Don't have an account?  <a href="#">Register here</a></p>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section> -->
 
 {%  endblock    %}

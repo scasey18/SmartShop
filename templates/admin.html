@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Admin Page</title>
+   <script src="{{ url_for('static',filename='js/admin.js') }}"></script>
+</head>
+
+<body>
+   <h3>All Customers</h3>
+   <div id="custForm">
+      <form id='AddCustForm' action='{{ request.path }}' method='post' hidden=true>
+		 <input class="Cust" hidden=true name="Customer" value="Add">
+		 <input class="Cust" name="id" type='text' value ="" hidden=true>
+         <label>First name:</label><br>
+         <input class="Cust" name='fname' type='text'><br>
+         <label>Last name:</label><br>
+         <input class="Cust" name='lname' type='text'><br>
+         <label>Email:</label><br>
+         <input class="Cust" name='email' type='text'><br>
+         <label>Password:</label><br>
+         <input class="Cust" name='pwd' type='text'><br>
+         <input type='submit' value='Submit'>
+		 <button type="button" onclick="cancelCust()">Cancel</button>
+      </form>
+      <button id="AddCustButton" onclick="showCustForm()">Add Customer</button>
+   </div>
+   <table>
+      <thead>
+         <tr>
+            <th>custID</th>
+            <th>First Name</th>
+			<th>Last Name</th>
+            <th>Email</th>
+         </tr>
+      </thead>
+
+      <tbody>
+         {% for cust in customer %}
+         <tr>
+		 <form action='{{ request.path }}' method='post'>
+            <td id="id{{ cust.custID }}">{{ cust.custID }}</td>
+            <td id="fName{{ cust.custID }}">{{ cust.fName }}</td> 
+			<td id="lName{{ cust.custID }}">{{ cust.lName }}</td>
+            <td id="emailAdr{{ cust.custID }}">{{ cust.emailAdr }}</td>
+			<td>
+				<button id="eCust{{ cust.custID }}" type="button" onclick="editCust({{cust.custID}})">Edit</button>
+			</td>
+            <td>
+                <input hidden=true name="id" value={{ cust.custID }}>
+				<input id="rCust{{ cust.custID }}" type='submit' name="Customer" value='Remove'>
+			</td>
+			</form>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   <h3>Products</h3>
+   <div id="prodForm">
+      <form id='AddProdForm' action='{{ request.path }}' method='post' hidden=true>
+		 <input class="Prod" hidden=true name="Product" value="Add">
+		 <input class="Prod" name="Pid" type='text' value ="" hidden=true>
+         <label>Name:</label><br>
+         <input class="Prod" name='name' type='text'><br>
+         <label>Price:</label><br>
+         <input class="Prod" name='price' type='text'><br>
+         <label>Stock:</label><br>
+         <input class="Prod" name='stock' type='number'><br>
+         <label>Description:</label><br>
+         <input class="Prod" name='desc' type='text'><br>
+         <input type='submit' value='Submit'>
+		 <button type="button" onclick="cancelProd()">Cancel</button>
+      </form>
+      <button id="AddProdButton" onclick="showProdForm()">Add Product</button>
+   </div>
+   <table>
+      <thead>
+         <tr>
+            <th>ProdID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for prod in products %}
+		 <form action='{{ request.path }}' method='post'>
+         <tr>
+            <td id="Pid{{ prod.prodID }}">{{ prod.prodID }}</td>
+            <td id="name{{ prod.prodID }}">{{ prod.name }}</td>
+            <td id="price{{ prod.prodID }}">{{ prod.price }}</td>
+            <td id="curinv{{ prod.prodID }}">{{ prod.curinv }}</td>
+			<td>
+				<button id="eProd{{ prod.prodID }}" type="button" onclick="editProd({{ prod.prodID }})">Edit</button>
+			</td>
+            <td>
+                <input hidden=true name="id" value={{ prod.prodID }}>
+				<input id="rProd{{ prod.prodID }}" type='submit' name="Product" value='Remove'>
+			</td>
+			</form>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+</body>
+
+</html>

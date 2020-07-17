@@ -1,5 +1,5 @@
 {%  extends "base.html" %}
-{%  block title %}home{%    endblock    %}
+{%  block title %}{{data}}{%    endblock    %}
 {%  block content   %}
 
  {%  block styles   %}{%  endblock    %}
@@ -14,7 +14,6 @@
 
         </aside>
         <section class="col-sm-8">
-
             <div class="defaultImage">
                 <img src="static/images/defaultHome.PNG" alt="defaultImage">
             </div>
@@ -62,8 +61,6 @@
             </a>
         </div>
     </section>
-</div>
-
 </div>
 
 {%  endblock    %}
