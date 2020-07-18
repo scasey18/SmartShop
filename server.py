@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_user, logout_user
 
-from tables import *
+from dbtools import *
 
 app = Flask(__name__)
 
@@ -22,13 +22,59 @@ app.secret_key='CS421'
 @login.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+	
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('homepage'))
 
 @app.route('/')
 @app.route('/home')
 def homepage():
 	if current_user.is_authenticated:
-		return render_template('home.html', data=current_user)
+		return render_template('home.html', user=current_user)
 	return render_template('home.html')
+	
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+
+@app.route('/cart')
+def getCart():
+    return render_template('cart.html')
+
+@app.route('/store')
+def store():
+    return render_template('store.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/thankyou')
+def signup_thankyou():
+    return render_template('signup_thankyou.html')
+
+
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+
+@app.route('/thank_you')
+def sales_thankyou():
+    return render_template('sales_thankyou.html')
+
+
+@app.route('/product')
+def product():
+    return render_template('product.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -47,33 +93,18 @@ def admin():
 		print(req)
 		if "Customer" in req:
 			if req["Customer"] == "Add":
-				cust = User(req['fname'],req['lname'],req['email'],req['pwd'])
-				db.session.add(cust)
+				addCustomer(req['fname'],req['lname'],req['email'],req['pwd'])
 			elif req["Customer"] == "Remove":
-				res = User.query.filter_by(custID=req["id"]).first()
-				db.session.delete(res)
+				deleteCustomer(req['id'])
 			elif req["Customer"] == "Update":
-				res = User.query.filter_by(custID=req["id"]).first()
-				res.fName = req['fname']
-				res.lName = req['lname']
-				res.emailAdr = req['email']
-				if str(req['pwd']) != '':
-					res.password = req['pwd']
+				updateProduct(req['id'],req['fname'],req['lname'],req['email'],req['pwd'])
 		elif "Product" in req:
 			if req["Product"] == "Add":
-				cust = Product(req['name'],req['price'],req['stock'],req['desc'])
-				db.session.add(cust)
+				addProduct(req['name'],req['price'],req['stock'],req['desc'])
 			elif req["Product"] == "Remove":
-				res = Product.query.filter_by(prodID=req["id"]).first()
-				db.session.delete(res)
+				deleteProduct(req['Pid'])
 			elif req["Product"] == "Update":
-				res = Product.query.filter_by(prodID=req["Pid"]).first()
-				res.name = req['name']
-				res.price = req['price']
-				res.curinv = req['stock']
-				if req['desc'] != '':
-					res.desc = req['desc']
-		db.session.commit()
+				updateProduct(req['Pid'],req['name'],req['price'],req['stock'],req['desc'])
 	return render_template("admin.html", customer=User.query.all(),products=Product.query.all())
 
 app.run()
