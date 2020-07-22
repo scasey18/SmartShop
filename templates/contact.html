@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %}Contact Us{% endblock %} {% block css %}
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock %}
+ {% block styles %}
 
 <style>
     .about-section {
@@ -6,22 +8,22 @@
         text-align: center;
         color: black;
     }
-    
+
     .container {
         padding: 0 16px;
     }
-    
+
     .container::after,
     .row::after {
         content: "";
         clear: both;
         display: table;
     }
-    
+
     .title {
         color: grey;
     }
-    
+
     .productImage {
         align-content: center;
         border-radius: 20px;
@@ -30,7 +32,7 @@
         margin-right: auto;
         width: 50%;
     }
-    
+
     body {
         background-image: url("static/images/loginBackground.jpg");
         width: 100%;
@@ -38,7 +40,8 @@
         background-size: 100%;
     }
 </style>
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
 
 <div class="about-section">
     <h1 style="text-align: center;"><b>Contact Us</b></h1>
