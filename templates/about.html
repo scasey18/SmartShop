@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %}About Us{% endblock %} {% block css %}
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+{% block styles %}
 
 <style>
     .about-section {
@@ -6,18 +8,18 @@
         text-align: center;
         color: black;
     }
-    
+
     .container {
         padding: 0 16px;
     }
-    
+
     .container::after,
     .row::after {
         content: "";
         clear: both;
         display: table;
     }
-    
+
     .title {
         color: grey;
     }
