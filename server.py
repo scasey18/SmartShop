@@ -97,7 +97,7 @@ def admin():
 			elif req["Customer"] == "Remove":
 				deleteCustomer(req['id'])
 			elif req["Customer"] == "Update":
-				updateProduct(req['id'],req['fname'],req['lname'],req['email'],req['pwd'])
+				updateCustomer(req['id'],req['fname'],req['lname'],req['email'],req['pwd'])
 		elif "Product" in req:
 			if req["Product"] == "Add":
 				addProduct(req['name'],req['price'],req['stock'],req['desc'])
