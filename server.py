@@ -15,18 +15,18 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 db.init_app(app)
 
 with app.app_context():
-    db.create_all()
+	db.create_all()
 
 app.secret_key='CS421'
 
 @login.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+	return User.query.get(user_id)
 	
 @app.route('/logout')
 def logout():
-    logout_user()
-    return redirect(url_for('homepage'))
+	logout_user()
+	return redirect(url_for('homepage'))
 
 @app.route('/')
 @app.route('/home')
@@ -37,43 +37,57 @@ def homepage():
 	
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+	return render_template('signup.html')
 
 
 @app.route('/cart')
 def getCart():
-    return render_template('cart.html')
+	if current_user.is_authenticated:
+		return render_template('cart.html', user=current_user)
+	return render_template('cart.html')
 
 @app.route('/store')
 def store():
-    return render_template('store.html')
+	if current_user.is_authenticated:
+		return render_template('store.html', user=current_user)
+	return render_template('store.html')
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+	if current_user.is_authenticated:
+		return render_template('about.html', user=current_user)
+	return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+	if current_user.is_authenticated:
+		return render_template('contact.html', user=current_user)
+	return render_template('contact.html')
 
 @app.route('/thankyou')
 def signup_thankyou():
-    return render_template('signup_thankyou.html')
+	return render_template('signup_thankyou.html')
 
 
 @app.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+	if current_user.is_authenticated:
+		return render_template('checkout.html', user=current_user)
+	return render_template('checkout.html')
 
 
 @app.route('/thank_you')
 def sales_thankyou():
-    return render_template('sales_thankyou.html')
+	if current_user.is_authenticated:
+		return render_template('sales_thankyou.html', user=current_user)
+	return render_template('sales_thankyou.html')
 
 
 @app.route('/product')
 def product():
-    return render_template('product.html')
+	if current_user.is_authenticated:
+		return render_template('product.html', user=current_user)
+	return render_template('product.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
