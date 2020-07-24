@@ -43,8 +43,8 @@ def getCart():
 @app.route('/store')
 def store():
 	if current_user.is_authenticated:
-		return render_template('store.html', user=current_user)
-	return render_template('store.html')
+		return render_template('store.html', user=current_user, products=Product.query.all())
+	return render_template('store.html', products=Product.query.all())
 
 @app.route('/about')
 def about():
