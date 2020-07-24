@@ -1,0 +1,195 @@
+<!DOCTYPE html> {% extends "base.html" %} {% block title %}Account Page{% endblock %} {% block styles %}
+
+
+
+<style type="text/css">
+    body {
+        background: linear-gradient(to right, #DCDCDC, #696969);
+        overflow-x: hidden;
+    }
+    
+    .container {
+        background: #fff;
+        margin: 0 auto;
+        box-shadow: 2px 5px 20px rgba(119, 119, 119, .5);
+        margin-bottom: 50px;
+        border-radius: 10px;
+    }
+    
+    nav a {
+        list-style: none;
+        padding: 35px;
+        color: #fff;
+        font-size: 1.1em;
+        display: block;
+        transition: all .3s ease-in-out;
+    }
+    
+    nav a:hover {
+        color: #10ac84;
+        cursor: pointer;
+        transform: scale(1, 2);
+    }
+    
+    nav a:first-child {
+        margin-top: 7px;
+    }
+    
+    nav a .active {
+        color: #10ac84;
+    }
+    
+    .rightbox {
+        width: 60%;
+        margin-left: 27%;
+        /*display: none;*/
+    }
+    
+    .tabShow {
+        transition: all .5s ease-in;
+        width: 80%
+    }
+    
+    h1 {
+        font-family: "Monsterrat", sans-serif;
+        color: #696969;
+        font-size: 1.2rem;
+        margin-top: 40px;
+        margin-bottom: 35px;
+    }
+    
+    h2 {
+        color: #777;
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        font-size: 8px;
+        letter-spacing: 1px;
+        margin-left: 2px;
+        margin-top: 10px;
+    }
+    
+    .input,
+    p {
+        border: 0;
+        border-bottom: 1px solid #3fb6a8;
+        width: 80%;
+        font-family: 'montserrat', sans-serif;
+        font-size: .7em;
+        padding: 7px 0;
+        color: #070707;
+        outline: none;
+    }
+    
+    span {
+        font-size: .7em;
+        color: #777;
+    }
+    
+    .btn {
+        font-family: "roboto", sans-serif;
+        text-transform: uppercase;
+        font-size: 15px;
+        border: 0;
+        color: #fff;
+        background: #3fb6a8;
+        padding: 7px 15px;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 2);
+        cursor: pointer;
+        margin-top: 15px;
+    }
+</style>
+
+{% endblock %} {% block content %}
+
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <title>Account</title>
+
+
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="rightbox">
+            <div class="profile tabShow">
+                <br>
+                <h1><b>Personal Info</b></h1>
+                <h2>Full Name</h2>
+                <input type="text" class="input" value="User's Name">
+                <h2>Birthday</h2>
+                <input type="text" class="input" value="User's Birthday">
+                <h2>Email</h2>
+                <input type="text" class="input" value="User's Email">
+                <h2>Password</h2>
+                <input type="password" class="input" value="User's Password">
+                <br>
+                <button class="btn">Update</button>
+
+            </div>
+            <div class="billing tabShow">
+                <h1><b>Recent Billing Info</b></h1>
+                <h2>Purchase Date </h2>
+                <input type="text" class="input" value="User's Purchase Date">
+
+                <h2>Item</h2>
+
+                <input type="text" class="input" value="User's Item">
+                <h2>Cost</h2>
+
+                <input type="text" class="input" value="User's Cost">
+                <br>
+                <!-- <button class="btn">Update</button> -->
+            </div>
+            <div class="settings tabShow">
+                <h1><b>Account Settings</b></h1>
+                <h2>Email </h2>
+
+                <input type="text" class="input" value="User's Email">
+                <h2>Password</h2>
+
+                <input type="text" class="input" value="User's Item">
+                <br>
+                <button class="btn">Update</button>
+            </div>
+            <br>
+            <br>
+        </div>
+
+    </div>
+    <script src="jquery/jquery.js"></script>
+    <script>
+        const tabBtn =
+            document.querySelector(".tab");
+        const tab =
+            document.querySelector(".tabShow");
+
+        function tabs(panelIndex) {
+            tab.forEach(function(node) {
+                node.style.display = "none";
+            });
+            tab[panelIndex].style.display = "block";
+        }
+        tabs(0);
+    </script>
+
+    <script>
+    </script>
+
+
+
+</body>
+
+
+
+
+
+
+</html>
+
+{% endblock %}

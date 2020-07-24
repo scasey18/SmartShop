@@ -90,6 +90,12 @@ def product():
 		return render_template('product.html', user=current_user)
 	return render_template('product.html')
 
+
+@app.route('/account')
+def account():
+    return render_template('account.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
