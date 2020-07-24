@@ -36,6 +36,9 @@ box-shadow: 10px 10px 20px 0px   #000;
             <form class="form-container" action='{{ request.path }}' method="post">
                 <h1 class="card-header bg-info text-center py-3 my-3 logo">ShopSmart</h1>
                 <h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
+					{% if error %}
+						<p class=error> {{ error }}
+					{% endif %}
                   <div class="form-group">
                     <label for="email">Email address</label>
                     <input name="uname" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>

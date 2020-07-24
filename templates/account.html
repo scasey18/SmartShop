@@ -16,29 +16,6 @@
         border-radius: 10px;
     }
     
-    nav a {
-        list-style: none;
-        padding: 35px;
-        color: #fff;
-        font-size: 1.1em;
-        display: block;
-        transition: all .3s ease-in-out;
-    }
-    
-    nav a:hover {
-        color: #10ac84;
-        cursor: pointer;
-        transform: scale(1, 2);
-    }
-    
-    nav a:first-child {
-        margin-top: 7px;
-    }
-    
-    nav a .active {
-        color: #10ac84;
-    }
-    
     .rightbox {
         width: 60%;
         margin-left: 27%;
@@ -163,33 +140,7 @@
 
     </div>
     <script src="jquery/jquery.js"></script>
-    <script>
-        const tabBtn =
-            document.querySelector(".tab");
-        const tab =
-            document.querySelector(".tabShow");
-
-        function tabs(panelIndex) {
-            tab.forEach(function(node) {
-                node.style.display = "none";
-            });
-            tab[panelIndex].style.display = "block";
-        }
-        tabs(0);
-    </script>
-
-    <script>
-    </script>
-
-
-
 </body>
-
-
-
-
-
-
 </html>
 
 {% endblock %}
