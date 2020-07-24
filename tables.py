@@ -61,3 +61,13 @@ class Orders(db.Model):
 		self.prodID = prodID
 		self.ShipAdrID = ShipAdrID
 		self.quantity = quantity
+
+def Cart(db.Model):
+	custID = db.Column(db.Integer, primary_key=True)
+	prodID = db.Column(db.Integer, primary_key=True)
+	quantity = db.Column(db.Integer)
+	
+	def init(self, custID, prodID, quantity):
+		self.custID = custID
+		self.prodID = prodID
+		self.quantity = quantity
