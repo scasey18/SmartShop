@@ -53,12 +53,7 @@ def getCart():
 
 @app.route('/store')
 def store():
-    stocks = []
-    all_stock = Product.query.all()
-    for stock in all_stock:
-        stocks.append(stock.prodID)
-    db.session.commit()
-    return render_template('store.html',  stocks=stocks)
+    return render_template('store.html',  products = Product.query.all())
 
 
 @app.route('/about')
