@@ -1,10 +1,13 @@
-{% extends "base.html" %} {% block title %}Store Page{% endblock %} {% block styles %}
+{% extends "base.html" %} {% block title %}Store Page{% endblock %} 
+
+{% block styles %}
 <style type="text/css">
     /*Start Dropdown Styles*/
     
     .dropbtn {
         background-color: gray;
         color: white;
+
         padding: 16px;
         font-size: 16px;
         border: none;
@@ -148,9 +151,11 @@
         }
     </script>
     <div class="row">
-        <div class="col-md-3">
+	{% for prod in products %}
+		<div class="col-md-3">
+            <!-- <div class="col-8 "> -->
             <div class="product-top">
-                <img class="productImage" src="static/images/img_9.jpeg">
+                <img class="productImage" src="static/stocks/{{prod.prodID}}.jpg">
                 <div class="overlay">
                     <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
                     <button type="button" class="btn btn-secondary" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
@@ -158,308 +163,17 @@
                 </div>
             </div>
             <div class="product-bottom text-center">
+                <!-- <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Prime Ape</h3>
-                <h5>$145.00</h5>
+                <i class="fa fa-star"></i> -->
+                <h6>{{prod.name}}</h6>
+                <h3>{{prod.desc}}</h3>
+                <h5>{{prod.price}}</h5>
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_10.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Tiger</h3>
-                <h5>$100.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_11.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Lion</h3>
-                <h5>$500.00</h5>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_14.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Eagle</h3>
-                <h5>$80.00</h5>
-            </div>
-
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_5.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Kitty</h3>
-                <h5>$30.00</h5>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_7.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Parrot</h3>
-                <h5>$65.00</h5>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_15.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Adult Kitty</h3>
-                <h5>$50.00</h5>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_8.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Giraffe</h3>
-                <h5>$235.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_12.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Fish</h3>
-                <h5>$15.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_16.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Monkey</h3>
-                <h5>$110.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_2.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>African Tiger</h3>
-                <h5>$250.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_6.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Squirrel</h3>
-                <h5>$30.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_3.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Puppy</h3>
-                <h5>$50.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_12.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Fish</h3>
-                <h5>$15.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_4.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Chick</h3>
-                <h5>$5.00</h5>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="product-top">
-                <img class="productImage" src="static/images/img_5.jpeg">
-                <div class="overlay">
-                    <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                    <button type="button" class="btn btn-secondary" title="Review Item"><i class="fa fa-heart"></i></button>
-
-                </div>
-            </div>
-            <div class="product-bottom text-center">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h3>Kitty</h3>
-                <h5>$30.00</h5>
-            </div>
-        </div>
-    </div>
+	{% endfor %}
+	</div>
 </div>
-
-
 {% endblock %}
