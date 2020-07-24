@@ -40,13 +40,11 @@ def getCart():
 		return render_template('cart.html', user=current_user)
 	return render_template('cart.html')
 
-
 @app.route('/store')
 def store():
 	if current_user.is_authenticated:
 		return render_template('store.html', user=current_user)
 	return render_template('store.html')
-
 
 @app.route('/about')
 def about():
@@ -54,13 +52,11 @@ def about():
 		return render_template('about.html', user=current_user)
 	return render_template('about.html')
 
-
 @app.route('/contact')
 def contact():
 	if current_user.is_authenticated:
 		return render_template('contact.html', user=current_user)
 	return render_template('contact.html')
-
 
 @app.route('/thankyou')
 def signup_thankyou():
@@ -73,18 +69,15 @@ def signup():
 	error = None
 	if request.method == "POST":
 		req = dict(request.form)
-		print(req)
 		user = User.query.filter_by(emailAdr=req['email']).first()
 		if (user != None):
-			error = "Email adress already in use"
-		if (req['pwd'] != req['cpwd']):
+			error = "Email address already in use"
+		elif (req['pwd'] != req['cpwd']):
 			error = "Passwords entered are not the same"
-		if error == None:
+		else:
 			addCustomer(req['fName'], req['lName'], req['email'], req['pwd'])
 			return redirect(url_for('signup_thankyou'))
-		else:
-			print("Error:",error)
-			return render_template('signup.html', error=error)
+		return render_template('signup.html', error=error)
 	return render_template('signup.html')
 
 @app.route('/checkout')
