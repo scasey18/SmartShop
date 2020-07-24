@@ -66,10 +66,25 @@ def contact():
 def signup_thankyou():
 	return render_template('signup_thankyou.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
 	if current_user.is_authenticated:
 		return redirect(url_for("homepage"))
+	error = None
+	if request.method == "POST":
+		req = dict(request.form)
+		print(req)
+		user = User.query.filter_by(emailAdr=req['email']).first()
+		if (user != None):
+			error = "Email adress already in use"
+		if (req['pwd'] != req['cpwd']):
+			error = "Passwords entered are not the same"
+		if error == None:
+			addCustomer(req['fName'], req['lName'], req['email'], req['pwd'])
+			return redirect(url_for('signup_thankyou'))
+		else:
+			print("Error:",error)
+			return render_template('signup.html', error=error)
 	return render_template('signup.html')
 
 @app.route('/checkout')
