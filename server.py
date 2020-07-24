@@ -14,7 +14,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 db.init_app(app)
 
 with app.app_context():
-    db.create_all()
+	db.create_all()
 
 app.secret_key = 'CS421'
 
@@ -30,9 +30,9 @@ def logout():
 @app.route('/')
 @app.route('/home')
 def homepage():
-    if current_user.is_authenticated:
-        return render_template('home.html', user=current_user)
-    return render_template('home.html')
+	if current_user.is_authenticated:
+		return render_template('home.html', user=current_user)
+	return render_template('home.html')
 
 @app.route('/cart')
 def getCart():
@@ -68,6 +68,8 @@ def signup_thankyou():
 
 @app.route('/signup')
 def signup():
+	if current_user.is_authenticated:
+		return redirect(url_for("homepage"))
 	return render_template('signup.html')
 
 @app.route('/checkout')
@@ -92,13 +94,15 @@ def product():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        req = dict(request.form)
-        user = User.query.filter_by(emailAdr=req['uname']).first()
-        if user.password == req['pwd']:
-            login_user(user)
-            return redirect(url_for('homepage'))
-    return render_template('login.html')
+	if request.method == "POST":
+		req = dict(request.form)
+		user = User.query.filter_by(emailAdr=req['uname']).first()
+		if (user == None or user.password != req['pwd']):
+			return render_template('login.html', error="Invalid username or password")
+		else:
+			login_user(user)
+			return redirect(url_for('homepage'))
+	return render_template('login.html')
 
 
 @app.route('/admin', methods=['GET', 'POST'])
