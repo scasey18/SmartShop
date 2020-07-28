@@ -77,6 +77,9 @@ def updateOrder(id, custID, ShipAdrID):
 	res.ShipAdrID = ShipAdrID
 	db.session.commit()
 	
+def getOrders(id):
+	return Orders.query.filter(custID=id).all()
+	
 def addtoCart(custID, prodID, quantity):
 	res = Cart.query.filter_by(custID=custID, prodID=prodID).first()
 	prod = Product.query.filter_by(prodID=prodID).first().curinv
@@ -123,6 +126,8 @@ def addRating(custID,prodID,rating,comment=""):
 	res = Rating.query.filter(custID=custID, prodID = prodID).all()
 	if res == None:
 		db.session.add(Rating(custID,prodID,rating,comment))
+		db.session.commit()
+		setProdRating(prodID)
 		db.session.commit()
 
 def updateRating(custID,prodID,rating,comment=""):
