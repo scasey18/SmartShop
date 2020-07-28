@@ -133,7 +133,7 @@ def login():
 		user = User.query.filter_by(emailAdr=req['uname']).first()
 		if (user == None or user.password != req['pwd']):
 			return render_template('login.html', error="Invalid username or password")
-		elif req['remember'] == 'on':
+		elif 'remember' in req and req['remember'] == 'on':
 			login_user(user, remember=True)
 		else:
 			login_user(user)
@@ -159,10 +159,18 @@ def admin():
 				deleteProduct(req['Pid'])
 			elif req["Product"] == "Update":
 				updateProduct(req['Pid'],req['name'],req['price'],req['stock'],req['desc'])
-	return render_template("admin.html", customer=User.query.all(),products=Product.query.all())
+	if current_user.is_authenticated:
+		if current_user.admin == 1:
+			return render_template("admin.html", customer=User.query.all(),products=Product.query.all())
+		else:
+			return "Account does not have access"	
+	return redirect(url_for('login'))
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 def account():
+	if request.method == "POST" and current_user.is_authenticated:
+		req = dict(request.form)
+		updateCustomer(current_user.get_id(), req['fName'],req['lName'],req['email'],req['pwd'])
 	if current_user.is_authenticated: 
 		return render_template('account.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return redirect(url_for('login'))
