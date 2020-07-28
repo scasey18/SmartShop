@@ -36,31 +36,44 @@ def logout():
 @app.route('/home')
 def homepage():
 	if current_user.is_authenticated:
-		return render_template('home.html', user=current_user)
+		return render_template('home.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return render_template('home.html')
 
-@app.route('/cart')
-def getCart():
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+	if request.method=="POST":
+		removeFromCart(current_user.get_id(),request.form.get('remove'))
 	if current_user.is_authenticated:
-		return render_template('cart.html', user=current_user)
+		cart=getCart(current_user.get_id())
+		prods=[]
+		for i in cart:
+			prods.append(Product.query.filter_by(prodID=i.prodID).first())
+		return render_template('cart.html', user=current_user, cart=len(cart), contents=cart, prods=prods)
 	return render_template('cart.html')
 
-@app.route('/store')
+@app.route('/store', methods=['GET', 'POST'])
 def store():
+	if request.method == "POST":
+		req = dict(request.form)
+		res = addtoCart(current_user.get_id(), req['id'], req['quan'])
+		if res == -1:
+			return str(-1)
+		return str(len(getCart(current_user.get_id())))
 	if current_user.is_authenticated:
-		return render_template('store.html', user=current_user, products=Product.query.all())
+		prods = Product.query.all()
+		return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
 	return render_template('store.html', products=Product.query.all())
 
 @app.route('/about')
 def about():
 	if current_user.is_authenticated:
-		return render_template('about.html', user=current_user)
+		return render_template('about.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return render_template('about.html')
 
 @app.route('/contact')
 def contact():
 	if current_user.is_authenticated:
-		return render_template('contact.html', user=current_user)
+		return render_template('contact.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return render_template('contact.html')
 
 @app.route('/thankyou')
@@ -85,24 +98,29 @@ def signup():
 		return render_template('signup.html', error=error)
 	return render_template('signup.html')
 
-@app.route('/checkout')
+@app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
 	if current_user.is_authenticated:
-		return render_template('checkout.html', user=current_user)
+		if request.method == "POST":
+			print("made it")
+			checkoutCart(current_user.get_id(), 1)
+			return redirect(url_for('sales_thankyou'))
+		cart = getCart(current_user.get_id())
+		return render_template('checkout.html', user=current_user, cart=len(cart), content = cart)
 	return render_template('checkout.html')
 
 
 @app.route('/thank_you')
 def sales_thankyou():
 	if current_user.is_authenticated:
-		return render_template('sales_thankyou.html', user=current_user)
+		return render_template('sales_thankyou.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return render_template('sales_thankyou.html')
 
 
 @app.route('/product')
 def product():
 	if current_user.is_authenticated:
-		return render_template('product.html', user=current_user)
+		return render_template('product.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return render_template('product.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -111,12 +129,15 @@ def login():
 		return redirect(url_for('account'))
 	if request.method == "POST":
 		req = dict(request.form)
+		print(req)
 		user = User.query.filter_by(emailAdr=req['uname']).first()
 		if (user == None or user.password != req['pwd']):
 			return render_template('login.html', error="Invalid username or password")
+		elif req['remember'] == 'on':
+			login_user(user, remember=True)
 		else:
 			login_user(user)
-			return redirect(url_for('homepage'))
+		return redirect(url_for('homepage'))
 	return render_template('login.html')
 
 
@@ -124,7 +145,6 @@ def login():
 def admin():
 	if request.method == 'POST':
 		req = dict(request.form)
-		print(req)
 		if "Customer" in req:
 			if req["Customer"] == "Add":
 				addCustomer(req['fname'],req['lname'],req['email'],req['pwd'])
@@ -143,7 +163,9 @@ def admin():
 
 @app.route('/account')
 def account():
-    return render_template('account.html')
+	if current_user.is_authenticated: 
+		return render_template('account.html', user=current_user, cart=len(getCart(current_user.get_id())))
+	return redirect(url_for('login'))
 
-
-app.run()
+if __name__ == "__main__":
+	app.run(debug=True)

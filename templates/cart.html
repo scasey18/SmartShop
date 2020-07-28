@@ -85,123 +85,49 @@ input, button{
                     </tr>
                 </thead>
                 <tbody>
+					{% for item in contents %}
+					{% set product = prods|selectattr('prodID', '==', item.prodID)|list|last %}
                     <tr>
                         <td width="100">
                             <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_1.jpeg"
+                                <div class="img-wrap"><img src="../static/stocks/{{item.prodID}}.jpg"
                                         class="img-thumbnail img-sm"></div>
                                 <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Dolphin</h6>
-                                    <dl class="param param-inline small">
+                                    <h6 class="title text-truncate">{{product.name}}</h6>
+                                   <!--  <dl class="param param-inline small">
                                         <dt>Size: </dt>
                                         <dd>200 lbs</dd>
                                     </dl>
                                     <dl class="param param-inline small">
                                         <dt>Color:</dt>
                                         <dd>Blue color</dd>
-                                    </dl>
+                                    </dl> -->
                                 </figcaption>
                             </figure>
                         </td>
                         <td>
                             <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+								{% for i in range(1,product.curinv+1) %}
+									<option>{{i}}</option>
+								{% endfor %}
                             </select>
                                 <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
                         </td>
                         <td>
                             <div class="price-wrap">
-                                <var class="price">USD 145</var>
-                                <small class="text-muted">(USD5 each)</small>
+                                <var class="price">${{product.price * item.quantity}}</var>
+                                <small class="text-muted">{{product.price}} each</small>
                             </div>
                         </td>
                         <td class="text-right">
-                            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
-                            <a href="" class="btn btn-outline-danger"> × Remove</a>
+                            <!-- <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
+                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a> -->
+							<form action='{{request.path}}' method='post'>
+								<button type='submit' class="btn btn-outline-danger" name='remove' value={{product.prodID}}> × Remove</button>
+							</form>
                         </td>
                     </tr>
-                    <tr>
-                        <td width="100">
-                            <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_11.jpeg"
-                                        class="img-thumbnail img-sm"></div>
-                                <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Lion</h6>
-                                    <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>300 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color: </dt>
-                                        <dd>White color</dd>
-                                    </dl>
-                                </figcaption>
-                            </figure>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
-                        </td>
-                        <td>
-                            <div class="price-wrap">
-                                <var class="price">USD 35</var>
-                                <small class="text-muted">(USD10 each)</small>
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right">
-                            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
-                            <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100">
-                            <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_3.jpeg"
-                                        class="img-thumbnail img-sm"></div>
-                                <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Puppy </h6>
-                                    <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>50 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color: </dt>
-                                        <dd>Black color</dd>
-                                    </dl>
-                                </figcaption>
-                            </figure>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
-                        </td>
-                        <td>
-                            <div class="price-wrap">
-                                <var class="price">USD 45</var>
-                                <small class="text-muted">(USD15 each)</small>
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right">
-                            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
-                            <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                        </td>
-                    </tr>
+					{% endfor %}
                 </tbody>
             </table>
         </div> <!-- card.// -->
@@ -210,7 +136,7 @@ input, button{
     </div>
         <div class="col-md-12 my-4  py-4">
             <div class="float-right">
-                <a href="#" class="btn link">Continue Shopping</a>
+                <a href="{{url_for('store')}}" class="btn link">Continue Shopping</a>
                 <a href="{{url_for( 'checkout' )}}" class="btn btn-success">Checkout</a>
             </div>
         </div>
