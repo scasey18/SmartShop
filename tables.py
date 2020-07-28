@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
 	emailAdr = db.Column(db.Text, unique=True)
 	password = db.Column(db.Text)
 	defAdr=db.Column(db.Integer)
+	admin=db.Column(db.Integer)
 
 	def __init__(self, fname, lname, emailAdr, password):
 		self.fName = fname
@@ -19,6 +20,7 @@ class User(UserMixin, db.Model):
 		self.emailAdr = emailAdr
 		self.password = password
 		self.defAdr = 0
+		self.admin = 0
 
 	def get_id(self):
 		return (self.custID)
