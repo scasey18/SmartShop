@@ -97,14 +97,16 @@
             <div class="profile tabShow">
                 <br>
                 <h1><b>Personal Info</b></h1>
-                <h2>Full Name</h2>
-                <input type="text" class="input" value="User's Name">
-                <h2>Birthday</h2>
-                <input type="text" class="input" value="User's Birthday">
+                <h2>First Name</h2>
+                <input type="text" class="input" value="{{user.fName}}">
+				<h2>Last Name</h2>
+                <input type="text" class="input" value="{{user.lName}}">
+                <!-- <h2>Birthday</h2>
+                <input type="text" class="input" value="User's Birthday"> -->
                 <h2>Email</h2>
-                <input type="text" class="input" value="User's Email">
+                <input type="text" class="input" value="{{user.emailAdr}}">
                 <h2>Password</h2>
-                <input type="password" class="input" value="User's Password">
+                <input type="password" class="input" value="">
                 <br>
                 <button class="btn">Update</button>
 
