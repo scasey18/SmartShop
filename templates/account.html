@@ -1,6 +1,6 @@
-<!DOCTYPE html> {% extends "base.html" %} {% block title %}Account Page{% endblock %} {% block styles %}
-
-
+<!DOCTYPE html> {% extends "base.html" %} 
+{% block title %}Account Page{% endblock %} 
+{% block styles %}
 
 <style type="text/css">
     body {
@@ -76,38 +76,35 @@
     }
 </style>
 
-{% endblock %} {% block content %}
-
-
+{% endblock %} 
+{% block content %}
 <html>
 
 <head>
     <link rel="stylesheet" href="fontawesome/css/all.css">
     <title>Account</title>
-
-
-
 </head>
 
 <body>
-
-
     <div class="container">
         <div class="rightbox">
             <div class="profile tabShow">
-                <br>
-                <h1><b>Personal Info</b></h1>
-                <h2>Full Name</h2>
-                <input type="text" class="input" value="User's Name">
-                <h2>Birthday</h2>
-                <input type="text" class="input" value="User's Birthday">
-                <h2>Email</h2>
-                <input type="text" class="input" value="User's Email">
-                <h2>Password</h2>
-                <input type="password" class="input" value="User's Password">
-                <br>
-                <button class="btn">Update</button>
-
+				<form action='{{request.path}}' method='post'>
+					<br>
+					<h1><b>Personal Info</b></h1>
+					<h2>First Name</h2>
+					<input type="text" class="input" name="fName" value="{{user.fName}}">
+					<h2>Last Name</h2>
+					<input type="text" class="input" name="lName" value="{{user.lName}}">
+					<!-- <h2>Birthday</h2>
+					<input type="text" class="input" value="User's Birthday"> -->
+					<h2>Email</h2>
+					<input type="text" class="input" name="email" value="{{user.emailAdr}}">
+					<h2>Password</h2>
+					<input type="password" class="input" name="pwd" value="">
+					<br>
+					<button type="submit" class="btn" name="update" value='profile'>Update</button>
+				</form>
             </div>
             <div class="billing tabShow">
                 <h1><b>Recent Billing Info</b></h1>
@@ -123,7 +120,8 @@
                 <br>
                 <!-- <button class="btn">Update</button> -->
             </div>
-            <div class="settings tabShow">
+			<br><br>
+            <!-- <div class="settings tabShow">
                 <h1><b>Account Settings</b></h1>
                 <h2>Email </h2>
 
@@ -133,13 +131,10 @@
                 <input type="text" class="input" value="User's Item">
                 <br>
                 <button class="btn">Update</button>
-            </div>
-            <br>
-            <br>
+            </div> -->
         </div>
-
     </div>
-    <script src="jquery/jquery.js"></script>
+    <!-- <script src="jquery/jquery.js"></script> -->
 </body>
 </html>
 

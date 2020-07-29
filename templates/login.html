@@ -1,8 +1,6 @@
 {%  extends "base.html" %}
 {%  block title %}Login{%    endblock    %}
-
 {% block styles %}
-
 <style type="text/css">
 .bg{
      background: linear-gradient(to right, #DCDCDC, #696969);
@@ -27,40 +25,38 @@ box-shadow: 10px 10px 20px 0px   #000;
 }
 </style>
 {% endblock %}
-
 {%  block content   %}
-
-<section class="container-fluid bg" >
-    <section class="row justify-content-center">
-        <section class="col-12 col-sm-6 col-md-3">
-            <form class="form-container" action='{{ request.path }}' method="post">
-                <h1 class="card-header bg-info text-center py-3 my-3 logo">ShopSmart</h1>
-                <h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
-					{% if error %}
-						<p class=error> {{ error }}
-					{% endif %}
-                  <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input name="uname" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                    <label for="password">Password</label>
-                    <input name="pwd" type="password" class="form-control" id="password" placeholder="*******" required>
-                  </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox">
-                    <label class="form-check-label" for="checkbox">Keep me signed in</label>
-                </div>
-                <button type="submit"  class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Submit</button>
-                <a href="#">Forgot pasword</a>
-                <p>Don't have an account?  <a href="/signup">Signup here</a></p>
-                <div class="panel-footer text-right">
-                <small>&copy; ShopSmart</small>
-            </div>
-            </form>
-        </section>
-    </section>
+<section class="container-fluid bg">
+	<section class="row justify-content-center">
+		<section class="col-12 col-sm-6 col-md-3">
+			<form class="form-container" action='{{ request.path }}' method="post">
+				<h1 class="card-header bg-info text-center py-3 my-3 logo">ShopSmart</h1>
+				<h4 class="card-header bg-info text-center py-3 my-3">Login</h4>
+				{% if error %}
+					<p class=error> {{ error }}
+				{% endif %}
+				<div class="form-group">
+					<label for="email">Email address</label>
+					<input name="uname" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" required>
+						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input name="pwd" type="password" class="form-control" id="password" placeholder="*******" required>
+				</div>
+				<div class="form-group form-check">
+					<input type="checkbox" class="form-check-input" name="remember" id="checkbox">
+						<label class="form-check-label" for="checkbox">Keep me signed in</label>
+				</div>
+				<button type="submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Submit</button>
+				<a href="#">Forgot pasword</a>
+				<p>Don't have an account?  <a href="/signup">Signup here</a></p>
+				<div class="panel-footer text-right">
+					<small>&copy; ShopSmart</small>
+				</div>
+			</form>
+		</section>
+	</section>
 </section>
-
 {%  endblock    %}
+				

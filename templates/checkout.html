@@ -32,6 +32,7 @@ body{
 
 {%  block content   %}
 <!--Main layout-->
+<p>{{request.path}}</p>
  <main class="container-fluid  bg" >
    <div class="container">
      <!-- Heading -->
@@ -43,7 +44,7 @@ body{
          <!--Card-->
          <div class="card ">
            <!--Card content-->
-           <form class="card-body ">
+           <form class="card-body" action="{{request.path}}" method="post">
              <div class="row">
                <div class="col-md-6 mb-1">
                  <!--firstName-->
