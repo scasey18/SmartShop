@@ -119,14 +119,13 @@ def sales_thankyou():
 	return render_template('sales_thankyou.html')
 
 
-@app.route('/product', methods=['GET', 'POST'])
-def product():
-    jsdata = ""
-    if request.method == 'POST':
-        req = dict(request.form)
+@app.route('/product/<int:prodID>')
+def product(prodID):
     if current_user.is_authenticated:
-        return render_template('product.html', user=current_user, products=Product.query.all(), productid=req['productid'])
-    return render_template('product.html', products=Product.query.all(), productid=req['productid'])
+        return render_template('product.html', prod=Product.query.filter_by(prodID=prodID).first(), user=current_user, cart=len(getCart(current_user.get_id())))
+
+    return render_template('product.html', prod=Product.query.get(prodID).first())
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -178,6 +177,13 @@ def account():
 	if current_user.is_authenticated: 
 		return render_template('account.html', user=current_user, cart=len(getCart(current_user.get_id())))
 	return redirect(url_for('login'))
+
+@app.errorhandler(404)
+def error404(error):
+	if current_user.is_authenticated: 
+		return render_template('404.html', user=current_user, cart=len(getCart(current_user.get_id())))
+	return render_template('404.html')
+
 
 if __name__ == "__main__":
 	app.run(debug=True)

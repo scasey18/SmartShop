@@ -69,12 +69,8 @@ box-shadow: 10px 10px 20px 0px   #000;
 <br>
   <div class="container ">
     <div class="row">
-      
-       
-        {% for prod in products %}
-           {% if prod.prodID|string == productid|string %}
              <div class="product-top text-center">
-                    <img class="productImage " src="static/stocks/{{prod.prodID}}.jpg">
+                    <img class="productImage" src="{{url_for('static',  filename='/stocks/prod.prodID.jpg')}}">
                     <div class="overlay">
                         <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
                         <button type="button" class="btn btn-secondary" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
@@ -82,11 +78,9 @@ box-shadow: 10px 10px 20px 0px   #000;
                     </div>
                 </div>
                 <div class="product-bottom text-center">
-                    <!-- <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i> -->
+                    {% for _ in range(0,prod.rating|int) %}
+					<i class="fa fa-star"></i>
+						{% endfor %}
                   
                 </div>
         <div class="col-md-6">
@@ -102,9 +96,6 @@ box-shadow: 10px 10px 20px 0px   #000;
            <h4 class = "cfont">{{prod.desc}}</h3>
            <h6 class="cfont">Stock :{{prod.curinv}}</h6>
       </div>  
-          {% endif %}
-        {% endfor %}
-        
       </div>
 
 </div>
