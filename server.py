@@ -39,13 +39,15 @@ def homepage():
     if current_user.is_authenticated:
         return render_template('home.html', user=current_user)
     return render_template('home.html')
+    # return 1 / 0
 
 
 @app.route('/cart')
 def getCart():
     if current_user.is_authenticated:
         return render_template('cart.html', user=current_user)
-    return render_template('cart.html')
+    # return render_template('cart.html')
+    return render_template('cart.html', products=Product.query.all())
 
 
 @app.route('/store')
@@ -107,14 +109,20 @@ def sales_thankyou():
     return render_template('sales_thankyou.html')
 
 
-@app.route('/product', methods=['GET', 'POST'])
-def product():
-    jsdata = ""
-    if request.method == 'POST':
-        req = dict(request.form)
+# @app.route('/product')
+# def product():
+#     if current_user.is_authenticated:
+#         return render_template('product.html', user=current_user)
+#     return render_template('product.html')
+#     return render_template('product.html', products=Product.query.all())
+
+@app.route('/product/<int:prodID>')
+def product(prodID):
     if current_user.is_authenticated:
-        return render_template('product.html', user=current_user, products=Product.query.all(), productid=req['productid'])
-    return render_template('product.html', products=Product.query.all(), productid=req['productid'])
+        return render_template('product.html', prod=Product.query.get(prodID))
+
+    return render_template('product.html', prod=Product.query.get(prodID))
+    # return render_template('product.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -139,28 +147,34 @@ def admin():
         print(req)
         if "Customer" in req:
             if req["Customer"] == "Add":
-                addCustomer(req['fname'], req['lname'],
-                            req['email'], req['pwd'])
+                addCustomer(req['fname'], req['lname'], req['email'], req['pwd'])
             elif req["Customer"] == "Remove":
                 deleteCustomer(req['id'])
             elif req["Customer"] == "Update":
-                updateCustomer(req['id'], req['fname'],
-                               req['lname'], req['email'], req['pwd'])
+                updateCustomer(req['id'], req['fname'], req['lname'], req['email'], req['pwd'])
         elif "Product" in req:
             if req["Product"] == "Add":
-                addProduct(req['name'], req['price'],
-                           req['stock'], req['desc'])
+                addProduct(req['name'], req['price'], req['stock'], req['desc'])
             elif req["Product"] == "Remove":
                 deleteProduct(req['Pid'])
             elif req["Product"] == "Update":
-                updateProduct(req['Pid'], req['name'],
-                              req['price'], req['stock'], req['desc'])
+                updateProduct(req['Pid'], req['name'], req['price'], req['stock'], req['desc'])
     return render_template("admin.html", customer=User.query.all(), products=Product.query.all())
 
 
 @app.route('/account')
 def account():
     return render_template('account.html')
+
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('404.html')
+
+
+@app.errorhandler(500)
+def error500(error):
+    return render_template('500.html')
 
 
 app.run()

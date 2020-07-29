@@ -14,7 +14,7 @@
 
 
 body{
-     background: linear-gradient(to right, #DCDCDC, #696969);
+     background-image: url("static/images/loginBackground.jpg");
     background-size: 100%;
 }
 .container-fluid{
@@ -85,37 +85,36 @@ input, button{
                     </tr>
                 </thead>
                 <tbody>
+                    {% for prod in products %}
+                    <!-- <h6>{{prod.name}}</h6> -->
+                    <!-- <h3>{{prod.desc}}</h3> -->
+                    <!-- <h5>{{prod.price}}</h5> -->
                     <tr>
                         <td width="100">
                             <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_1.jpeg"
+                                <div class="img-wrap"><img src="static/stocks/{{prod.prodID}}.jpg"
                                         class="img-thumbnail img-sm"></div>
+
                                 <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Dolphin</h6>
+                                    <h6 class="title text-truncate">{{prod.name}}</h6>
                                     <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>200 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color:</dt>
-                                        <dd>Blue color</dd>
+                                        {{prod.desc}}
                                     </dl>
                                 </figcaption>
                             </figure>
                         </td>
                         <td>
-                            <select class="form-control">
+                            <!-- <select class="form-control">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
-                            </select>
-                                <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
+                            </select> -->
+                             <input type="number" value="1" min="0" max="1000" step="1"/>
                         </td>
                         <td>
                             <div class="price-wrap">
-                                <var class="price">USD 145</var>
-                                <small class="text-muted">(USD5 each)</small>
+                                <var class="price">${{prod.price}}</var>
                             </div>
                         </td>
                         <td class="text-right">
@@ -124,87 +123,10 @@ input, button{
                             <a href="" class="btn btn-outline-danger"> × Remove</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td width="100">
-                            <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_11.jpeg"
-                                        class="img-thumbnail img-sm"></div>
-                                <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Lion</h6>
-                                    <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>300 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color: </dt>
-                                        <dd>White color</dd>
-                                    </dl>
-                                </figcaption>
-                            </figure>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
-                        </td>
-                        <td>
-                            <div class="price-wrap">
-                                <var class="price">USD 35</var>
-                                <small class="text-muted">(USD10 each)</small>
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right">
-                            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
-                            <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100">
-                            <figure class="media">
-                                <div class="img-wrap"><img src="../static/images/img_3.jpeg"
-                                        class="img-thumbnail img-sm"></div>
-                                <figcaption class="media-body">
-                                    <h6 class="title text-truncate">Puppy </h6>
-                                    <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>50 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color: </dt>
-                                        <dd>Black color</dd>
-                                    </dl>
-                                </figcaption>
-                            </figure>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
-                        </td>
-                        <td>
-                            <div class="price-wrap">
-                                <var class="price">USD 45</var>
-                                <small class="text-muted">(USD15 each)</small>
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right">
-                            <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
-                            <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                        </td>
-                    </tr>
+                            {% endfor%}
                 </tbody>
             </table>
-        </div> <!-- card.// -->
+        </div>
         <div class="panel-footer text-right">
         <small>&copy; ShopSmart</small>
     </div>

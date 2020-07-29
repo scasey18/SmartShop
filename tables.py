@@ -54,24 +54,25 @@ class Address(db.Model):
 
 
 class Orders(db.Model):
-	ordID = db.Column(db.Integer, primary_key=True)
-	custID = db.Column(db.Integer)
-	prodID = db.Column(db.Integer)
-	ShipAdrID = db.Column(db.Integer)
-	quantity = db.Column(db.Integer)
-	
-	def __init__(self, custID, prodID, ShipAdrID, quantity):
-		self.custID = custID
-		self.prodID = prodID
-		self.ShipAdrID = ShipAdrID
-		self.quantity = quantity
+    ordID = db.Column(db.Integer, primary_key=True)
+    custID = db.Column(db.Integer)
+    prodID = db.Column(db.Integer)
+    ShipAdrID = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+
+    def __init__(self, custID, prodID, ShipAdrID, quantity):
+        self.custID = custID
+        self.prodID = prodID
+        self.ShipAdrID = ShipAdrID
+        self.quantity = quantity
+
 
 class Cart(db.Model):
-	custID = db.Column(db.Integer, primary_key=True)
-	prodID = db.Column(db.Integer, primary_key=True)
-	quantity = db.Column(db.Integer)
-	
-	def init(self, custID, prodID, quantity):
-		self.custID = custID
-		self.prodID = prodID
-		self.quantity = quantity
+    custID = db.Column(db.Integer, primary_key=True)
+    prodID = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer)
+
+    def init(self, custID, prodID, quantity):
+        self.custID = custID
+        self.prodID = prodID
+        self.quantity = quantity
