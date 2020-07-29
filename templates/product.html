@@ -5,7 +5,7 @@
 <style type="text/css">
 
 body{
-       background-image: url("static/images/loginBackground.jpg");
+       background: linear-gradient(to right, #DCDCDC, #696969);
        background-size: 100%;
 }
 
@@ -26,109 +26,90 @@ padding: 20px;
 border-radius: 25px;
 box-shadow: 10px 10px 20px 0px   #000;
 }
+
+.product-image, img{
+        height:750px!important;
+        border-radius: 50px;
+        border: 10px solid #555; 
+    }
+
+.mt-5, .my-5 {
+  margin-top: 4rem!important;
+  background: #333; 
+}
+
+.row {
+  background: #333;
+}
+
+.cfont {
+  color: white;
+}
+
+.container {
+  max-width: 950px;
+}
+
+.titlehead {
+  font-size: 6rem;
+  color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;    
+}
+
 </style>
-<script>
-        $(document).ready(function () {
-             var arrivalDate = new Date();
-              arrivalDate.setDate(arrivalDate.getDate() + 14);
-            document.getElementById("spn").innerHTML = arrivalDate.toDateString();
-          });
-</script>
-
-
 {% endblock %}
 
 {%  block content   %}
 
 <div class="container-fluid bg">
   <div class="container mt-5 kg">
-<h2 class="text-center mb-5 smrt">ShopSmart</h2>
+<!-- <h2 class="text-center mb-5 smrt cfont">ShopSmart</h2> -->
+<h1 class = "text-center titlehead text-uppercase cfont titlehead"><b>Shop Smart</b></h1>
+<br>
   <div class="container ">
     <div class="row">
-        	{% if prod %}
-      <div class="col-md-6">
-          <!-- <img class="productImage" src="{{url_for('static',  filename='/stocks/prod.prodID.jpg')}}"> -->
-            <img class="productImage" src="static/stocks/{{prod.prodID}}.jpg">
-        </div>
+      
+       
+        {% for prod in products %}
+           {% if prod.prodID|string == productid|string %}
+             <div class="product-top text-center">
+                    <img class="productImage " src="static/stocks/{{prod.prodID}}.jpg">
+                    <div class="overlay">
+                        <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
+                        <button type="button" class="btn btn-secondary" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
+
+                    </div>
+                </div>
+                <div class="product-bottom text-center">
+                    <!-- <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i> -->
+                  
+                </div>
         <div class="col-md-6">
-
           <div class="row">
-            <h1><i class="fas fa-dollar-sign"></i>{{prod.price}}</h1><h3>
+            <h1 class="cfont"><i ></i>{{prod.name}}</h1>&nbsp;&nbsp;<h3>
             </h3>&nbsp;&nbsp;
-            <h3 class="text-success"><span style="color: black; font-weight: bold;">& free shipping </span></h3>
-  </div>
-            <h4 ><span style="color: black; font-weight: bold;"></span>{{prod.desc}} </h4>
-
-          <!-- <div class="row">
-            <h3 class="text-warning">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-            </h3>&nbsp;&nbsp;
-          </div> -->
-          <div class="row">
-            <p><i class="text-success far fa-check-square"></i><strong></strong>&nbsp;Get 20%
-              Instant Discount on Debit Cards purchases</p>
-
-            <p><i class="text-success far fa-check-square"></i><strong></strong>&nbsp;Get 5%
-              cashback on all credit cards purchases  Cards</p>
-
-              <p><i class="text-success far fa-check-square"></i><strong></strong>&nbsp;&nbsp;Get 20%
-                Instant Discount on any purchases with <i class="fab fa-google-wallet"></i>
-                google wallet</p>
-
-            <p><i class="text-success far fa-check-square"></i><strong></strong>&nbsp;extra
-              &nbsp;5% discount for all students
-            </p>
-
+            <div class="row">
+            <p><i class="text-success far"></i><strong>&nbsp;</strong>&nbsp;
+             </p>
           </div>
-          <div class="row mt-4">
-            <h3 class="text-info"><i class="fas fa-map-marker-alt"></i></h3>
-                <span class="text-success"> &nbsp; Delivery by &nbsp; </span> <span id="spn"></span> <span class="text-success"> | FREE</span>
-          </div>
-      </div>
-  	{% endif %}
-</div>
-</div>
-<!-- <div class="container mb-5">
-    <div class="row">
-      <h2 class="my-5">Ratings & Reviews</h2>
-    </div>
-    <div class="row mb-5">
-      <div class="media">
-        <img class="mr-3" src="static/images/img_5.jpeg" alt="Generic placeholder" width="50">
-        <div class="media-body">
-          <h5 class="mt-0">Very sweet Puppy. <span class="text-warning"><i class="fas fa-star"></i><i
-                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
-                class="far fa-star"></i></span></h5>
-
-          <p>Bootstrsap really does make learning web application fun and easy.
-               And this poppy is just so adorable and sweet</p>
-
-
         </div>
+            <h3 class = "fas fa-dollar-sign cfont">{{prod.price}}</h4>
+           <h4 class = "cfont">{{prod.desc}}</h3>
+           <h6 class="cfont">Stock :{{prod.curinv}}</h6>
+      </div>  
+          {% endif %}
+        {% endfor %}
+        
       </div>
-    </div>
-    <div class="row mb-2">
-      <h2>Post Your Own Reviews</h2>
-    </div>
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputtextarea">Reviews</label>
-        <textarea type="text" class="form-control" id="exampleInputtextarea" placeholder="Write your Reviews"
-          rows="4"></textarea>
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      </div>
-      <button type="submit" class="btn btn-primary btn-sm">Submit Review</button>
-    </form>
-  </div> -->
+
+</div>
+</div>
+
 </div>
  </div>
 </html>
