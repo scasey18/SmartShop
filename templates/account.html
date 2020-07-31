@@ -9,11 +9,12 @@
     }
     
     .container {
-        background: #fff;
+        background: #696969;
         margin: 0 auto;
         box-shadow: 10px 10px 20px 0px   #000;
         margin-bottom: 50px;
         border-radius: 10px;
+        margin-top: 50px;
     }
     
     .rightbox {
@@ -25,21 +26,23 @@
     .tabShow {
         transition: all .5s ease-in;
         width: 80%
+
     }
     
     h1 {
         font-family: "Monsterrat", sans-serif;
-        color: #696969;
+        color: white;
         font-size: 1.2rem;
         margin-top: 40px;
         margin-bottom: 35px;
+        font-size: 24px
     }
     
     h2 {
-        color: #777;
+        color: white;
         font-family: "Roboto", sans-serif;
         text-transform: uppercase;
-        font-size: 8px;
+        font-size: 16px;
         letter-spacing: 1px;
         margin-left: 2px;
         margin-top: 10px;
@@ -51,10 +54,11 @@
         border-bottom: 1px solid #3fb6a8;
         width: 80%;
         font-family: 'montserrat', sans-serif;
-        font-size: .7em;
+        font-size: 1em;
         padding: 7px 0;
         color: #070707;
         outline: none;
+        border-radius: 5px;
     }
     
     span {
@@ -74,6 +78,15 @@
         cursor: pointer;
         margin-top: 15px;
     }
+
+    .billing {
+        height: 400px;
+    }
+
+    .titlehead {
+        color: white;
+        font-size: 38px;
+    }
 </style>
 
 {% endblock %} 
@@ -87,8 +100,13 @@
 
 <body>
     <div class="container">
+
         <div class="rightbox">
             <div class="profile tabShow">
+                <br>
+                <br>
+                <br>
+                 <h3 class = "titlehead text-center">Account Information</h3>
 				<form action='{{request.path}}' method='post'>
 					<br>
 					<h1><b>Personal Info</b></h1>
@@ -103,21 +121,24 @@
 					<h2>Password</h2>
 					<input type="password" class="input" name="pwd" value="">
 					<br>
+                    <br>
 					<button type="submit" class="btn" name="update" value='profile'>Update</button>
 				</form>
             </div>
             <div class="billing tabShow">
-                <h1><b>Recent Billing Info</b></h1>
-                <h2>Purchase Date </h2>
-                <input type="text" class="input" value="User's Purchase Date">
+                <h1><b>Billing Address</b></h1>
+                <h2>Address </h2>
+                <input type="text" class="input" value="Address">
 
-                <h2>Item</h2>
+                <h2>Zip Code</h2>
 
-                <input type="text" class="input" value="User's Item">
-                <h2>Cost</h2>
+                <input type="text" class="input" value="Zip-Code">
+                <h2>City</h2>
 
-                <input type="text" class="input" value="User's Cost">
+                <input type="text" class="input" value="City">
                 <br>
+                <br>
+                <button type="submit" class="btn" name="update" value='profile'>Update</button>
                 <!-- <button class="btn">Update</button> -->
             </div>
 			<br><br>
