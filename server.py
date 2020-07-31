@@ -108,7 +108,8 @@ def checkout():
 			checkoutCart(current_user.get_id(), 1)
 			return redirect(url_for('sales_thankyou'))
 		cart = getCart(current_user.get_id())
-		return render_template('checkout.html', user=current_user, cart=len(cart), content = cart)
+		print(getAddress(current_user.defAdr))
+		return render_template('checkout.html', user=current_user, adr=getAddress(current_user.defAdr), cart=len(cart), content = getCartContents(cart))
 	return render_template('checkout.html')
 
 
