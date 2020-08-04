@@ -106,11 +106,17 @@ input, button{
                             </figure>
                         </td>
                         <td>
-                            <select class="form-control">
-								{% for i in range(1,product.curinv+1) %}
-									<option>{{i}}</option>
-								{% endfor %}
-                            </select>
+							<form action="{{request.path}}" method="POST">
+								<select name="{{product.prodID}}" class="form-control" autocomplete="off" onchange="this.form.submit()">
+									{% for i in range(1,product.curinv+1) %}
+										{% if i == item.quantity %}
+											<option value="{{i}}" selected >{{i}}</option>
+										{% else %}
+											<option value="{{i}}">{{i}}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</form>
                                 <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
                         </td>
                         <td>

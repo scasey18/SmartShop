@@ -2,10 +2,11 @@
 {%  block title %}Checkout{%    endblock    %}
 
  {%  block styles   %}
-<!--  <link rel="stylesheet" href="{{url_for('static', filename='styles/checkout.css')}}"> -->
+<link rel="stylesheet" href="{{url_for('static',filename='styles/checkout.css')}}">
+<script src="{{ url_for('static',filename='js/checkout.js') }}"></script>
 <style>
 body{
-     background-image: url("static/images/loginBackground.jpg");
+     background-image: linear-gradient(to right, #DCDCDC, #696969);
     background-size: 100%;
 }
     .bg{
@@ -67,17 +68,17 @@ body{
              </div>
              <!--address-->
              <div class="md-form mb-2">
-               <input type="text" id="address" class="form-control" placeholder="{{adr.street}}">
+               <input type="text" name="street" id="address" class="form-control" placeholder="{{adr.street}}">
                <label for="address" class="">Shipping Address</label>
              </div>
              <!--address-2-->
              <div class="md-form mb-5">
-               <input type="text" id="address-2" class="form-control" placeholder="{{adr.suite}}">
+               <input type="text" id="address-2" name="suite" class="form-control" placeholder="{{adr.suite}}">
                <label for="address-2" class="">Address 2 (optional)</label>
              </div>
              <div class="row">
                <div class="col-lg-4 col-md-12 mb-2">
-                 <select class="custom-select d-block w-100" id="country" required>
+                 <select class="custom-select d-block w-100" name="country" id="country" required>
                    <!-- <option value="">Choose...</option> -->
                    <option  value="US">United States</option>
                  </select>
@@ -87,7 +88,7 @@ body{
                  </div>
                </div>
                <div class="col-lg-4 col-md-6 mb-2">
-                 <select class="custom-select d-block w-100" id="state" required>
+                 <select class="custom-select d-block w-100" id="state" name="state" required>
                      <option value="none">Choose...</option>
                      <option value="AL">Alabama</option>
                      <option value="AK">Alaska</option>
@@ -146,7 +147,7 @@ body{
                  </div>
                </div>
                <div class="col-lg-4 col-md-6 mb-2">
-                 <input type="text" class="form-control" id="zip" placeholder="{{adr.zip}}" required>
+                 <input type="text" class="form-control" id="zip" placeholder="{{adr.zip}}" name="zip" required>
                  <label for="zip">Zip</label>
                  <div class="invalid-feedback">
                    Zip code required.
@@ -324,10 +325,10 @@ body{
 			{% for i in content %}
 			   <li class="list-group-item d-flex justify-content-between lh-condensed">
 				 <div>
-				   <h6 class="my-0">{{i.name}}</h6>
-				   <small class="text-muted">{{i.desc}}</small>
+				   <h6 class="my-0">{{i[1]}} x {{i[0].name}}</h6>
+				   <small class="text-muted">{{i[0].desc}}</small>
 				 </div>
-				 <span class="text-muted">{{i.price}}</span>
+				 <span class="text-muted">{{i[0].price * i[1]}}</span>
 			   </li>
             {% endfor %}
            <!-- <li class="list-group-item d-flex justify-content-between bg-light">
@@ -339,7 +340,7 @@ body{
            </li> -->
            <li class="list-group-item d-flex justify-content-between">
              <span>Total (USD)</span>
-             <strong>{{content|sum(attribute='price')}}</strong>
+             <strong>0.00</strong>
            </li>
          </ul>
          <!-- Cart -->

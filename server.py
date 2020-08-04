@@ -43,7 +43,12 @@ def homepage():
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
 	if request.method=="POST":
-		removeFromCart(current_user.get_id(),request.form.get('remove'))
+		req=dict(request.form)
+		if "remove" in req:
+			removeFromCart(current_user.get_id(),req['remove'])
+		else:
+			k = list(req.keys())[0]
+			updateCart(current_user.get_id(), k, int(req[k]))
 	if current_user.is_authenticated:
 		cart=getCart(current_user.get_id())
 		prods=[]
@@ -105,10 +110,11 @@ def signup():
 def checkout():
 	if current_user.is_authenticated:
 		if request.method == "POST":
-			checkoutCart(current_user.get_id(), 1)
+			req = dict(request.form)
+			adr = addAddress(req['street'],req['suite'],req['state'], req['country'],req['zip'])
+			checkoutCart(current_user.get_id(), adr.adrID)
 			return redirect(url_for('sales_thankyou'))
 		cart = getCart(current_user.get_id())
-		print(getAddress(current_user.defAdr))
 		return render_template('checkout.html', user=current_user, adr=getAddress(current_user.defAdr), cart=len(cart), content = getCartContents(cart))
 	return render_template('checkout.html')
 

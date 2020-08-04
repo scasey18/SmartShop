@@ -42,7 +42,7 @@ class Product(db.Model):
 		self.price = price
 		self.curinv = curinv
 		self.desc = desc
-		rating = 5.0
+		rating = 5.0 #default 5 star rating
 	
 	def __repr__(self):
 		return f"Product {self.prodID}, {self.name}, Inv:{self.curinv}, {self.price}"
@@ -68,6 +68,7 @@ class Address(db.Model):
 
 class Orders(db.Model):
 	ordID = db.Column(db.Integer, primary_key=True)
+	#confirmNum = db.Column(db.Integer, unique=True)
 	custID = db.Column(db.Integer)
 	ShipAdrID = db.Column(db.Integer)
 	

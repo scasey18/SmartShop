@@ -15,6 +15,15 @@ def addtoCart(custID, prodID, quantity):
 	db.session.commit()
 	return 0
 
+def updateCart(custID, prodID, quantity):
+	res = Cart.query.filter_by(custID=custID, prodID=prodID).first()
+	prod = Product.query.filter_by(prodID=prodID).first().curinv
+	if (quantity > prod):
+		return -1
+	res.quantity = int(quantity)
+	db.session.commit()
+	return 0
+
 def removeFromCart(custID,prodID):
 	res = Cart.query.filter_by(custID=custID, prodID=prodID).first()
 	if (res != None):
@@ -30,7 +39,7 @@ def emptyCart(custID):
 def getCartContents(cart):
 	contents = []
 	for i in cart:
-		contents.append(getProduct(i.prodID))
+		contents.append([getProduct(i.prodID), i.quantity])
 	return contents
 	
 def checkoutCart(custID, shipAdrID):

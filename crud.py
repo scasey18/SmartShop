@@ -60,6 +60,7 @@ def addAddress(street, suite, state, country, zip):
 	adr = Address(street, suite, state, country, zip)
 	db.session.add(adr)
 	db.session.commit()
+	return adr
 
 def removeAddress(id):
 	adr = getAddress(id)
