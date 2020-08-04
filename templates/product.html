@@ -11,7 +11,7 @@ body{
 
 .bg{
     width: 100%;
-    height: 100vh;
+    height: 90vh;
 
 }
 .smrt{
@@ -19,7 +19,7 @@ body{
     font-style: italic;
 }
 .kg{
-top: 200vh;
+top: 2000vh;
 background: #fff;
 margin-top: 40px;
 padding: 20px;
@@ -28,80 +28,159 @@ box-shadow: 10px 10px 20px 0px   #000;
 }
 
 .product-image, img{
-        height:750px!important;
-        border-radius: 50px;
-        border: 10px solid #555; 
+        height:770px!important;
+        border-radius: 40px;
+        border: 10px solid #555;
     }
 
 .mt-5, .my-5 {
   margin-top: 4rem!important;
-  background: #333; 
+  background: #333;
 }
 
 .row {
   background: #333;
+
 }
 
 .cfont {
   color: white;
+  font-size: 2.3rem;
 }
 
 .container {
-  max-width: 950px;
+  max-width: 2000px;
+  height: 1090px;
+
 }
 
 .titlehead {
   font-size: 6rem;
   color: white;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;    
+  -webkit-text-stroke-color: black;
+}
+
+.purchasebutt {
+  width: 20%;
+  background: #008B8B;
+}
+
+.review {
+  color: #008B8B ;
+  size: 10rem;
+}
+
+.prodname {
+  font-size: 3rem;
+}
+
+.ddate {
+  font-size: 1.3rem;
+}
+
+.stock {
+  font-size: 1.4rem;
+}
+
+#spn{
+    color: white;
 }
 
 </style>
+
+<script>
+$(document).ready(function () {
+     var arrivalDate = new Date();
+      arrivalDate.setDate(arrivalDate.getDate() + 14);
+     document.getElementById("spn").innerHTML = arrivalDate.toDateString();
+  });
+
+        function addCart(id) {
+      $.post('/store', {'id': id, 'quan': 1}, null, "json").done(function(data) {
+        if (data == "-1"){
+          alert("Reached max of product in cart");
+        }
+        else {
+          document.getElementById("cart-item").textContent=data;
+          document.getElementById("shopping-cart-item").textContent=data;
+          console.log(data);
+        }
+      });
+    }
+</script>
+
+<script>
+
+</script>
 {% endblock %}
 
 {%  block content   %}
 
+
 <div class="container-fluid bg">
   <div class="container mt-5 kg">
-<!-- <h2 class="text-center mb-5 smrt cfont">ShopSmart</h2> -->
+
 <h1 class = "text-center titlehead text-uppercase cfont titlehead"><b>Shop Smart</b></h1>
 <br>
   <div class="container ">
     <div class="row">
-             <div class="product-top text-center">
-                    <img class="productImage" src="{{url_for('static',  filename='/stocks/prod.prodID.jpg')}}">
-                    <div class="overlay">
-                        <button type="button" class="btn btn-secondary" title="Add to Cart"><i class ="fa fa-shopping-cart"></i></button>
-                        <button type="button" class="btn btn-secondary" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
 
+           {% if prod %}
+           {% set productPath = 'stocks' ~ '/' ~ prod.prodID ~ '.jpg' %}
+
+             <div class="product-top text-center">
+                 <img class="productImage" src="{{url_for('static',  filename=productPath)}}">
+                    <div class="overlay">
+                        <button type="button" class="btn btn-secondary purchasebutt" title="Add to Cart" onclick="addCart({{prod.prodID}})"><i class ="fa fa-shopping-cart"></i></button>
+                        <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
                     </div>
                 </div>
-                <div class="product-bottom text-center">
-                    {% for _ in range(0,prod.rating|int) %}
-					<i class="fa fa-star"></i>
-						{% endfor %}
-                  
-                </div>
-        <div class="col-md-6">
-          <div class="row">
-            <h1 class="cfont"><i ></i>{{prod.name}}</h1>&nbsp;&nbsp;<h3>
-            </h3>&nbsp;&nbsp;
-            <div class="row">
-            <p><i class="text-success far"></i><strong>&nbsp;</strong>&nbsp;
-             </p>
-          </div>
-        </div>
-            <h3 class = "fas fa-dollar-sign cfont">{{prod.price}}</h4>
-           <h4 class = "cfont">{{prod.desc}}</h3>
-           <h6 class="cfont">Stock :{{prod.curinv}}</h6>
-      </div>  
+
+        <div class="col-md-6 text-center ">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+
+            <h1 class="cfont prodname"><i ></i>{{prod.name}}</h1>
+            <p><i class="text-success far"></i><strong>&nbsp;</strong>&nbsp;</p>
+
+            <h3 class = "fas fa-dollar-sign cfont">{{prod.price}}</h3>
+              <br><br>
+           <h4 class = "cfont">{{prod.desc}}</h4>
+            <br>
+           <h6 class="cfont stock">Stock :{{prod.curinv}}</h6>
+           <br>
+
+            <h3 class="text-info"><i class="fas fa-map-marker-alt"></i></h3>
+                <span class="text-success ddate"> &nbsp; Delivery by &nbsp; </span> <span id="spn"></span> <span class="text-success ddate"> | FREE</span>
+                <br>
+                <br>
+            {% for _ in range(0,prod.rating|int) %}
+          <i class="fa fa-star fa-2x review"></i>
+                {% endfor %}
+
       </div>
+        {% endif %}
+
+        {% for rate in ratings %}
+        <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
+          <h6 class="cfont stock">Customer :{{rate.custID}}</h6>
+          <h6 class="cfont stock">Rating :{{rate.rating}}</h6>
+          <h6 class="cfont stock">Comments :{{rate.comments}}</h6>
+
+
+      </div>
+      {% endfor %}
+</div>
+</div>
 
 </div>
 </div>
 
-</div>
- </div>
-</html>
 {%  endblock    %}
