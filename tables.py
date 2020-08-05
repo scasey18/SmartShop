@@ -31,22 +31,22 @@ class User(UserMixin, db.Model):
 
 
 class Product(db.Model):
-	prodID = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.Text)
-	price = db.Column(db.Numeric(scale=2))
-	curinv = db.Column(db.Integer)
-	rating = db.Column(db.Float)
-	desc = db.Column(db.Text)
+    prodID = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    price = db.Column(db.Numeric(scale=2))
+    curinv = db.Column(db.Integer)
+    rating = db.Column(db.Float)
+    desc = db.Column(db.Text)
 
-	def __init__(self, name, price, curinv, desc):
-		self.name = name
-		self.price = price
-		self.curinv = curinv
-		self.desc = desc
-		rating = 5.0 #default 5 star rating
-	
-	def __repr__(self):
-		return f"Product {self.prodID}, {self.name}, Inv:{self.curinv}, {self.price}"
+    def __init__(self, name, price, curinv, desc):
+        self.name = name
+        self.price = price
+        self.curinv = curinv
+        self.desc = desc
+        rating = 5.0
+
+    def __repr__(self):
+        return f"Product {self.prodID}, {self.name}, Inv:{self.curinv}, {self.price}"
 
 
 class Address(db.Model):
@@ -69,17 +69,17 @@ class Address(db.Model):
 
 
 class Orders(db.Model):
-	ordID = db.Column(db.Integer, primary_key=True)
-	#confirmNum = db.Column(db.Integer, unique=True)
-	custID = db.Column(db.Integer)
-	ShipAdrID = db.Column(db.Integer)
-	
-	def __init__(self, custID, ShipAdrID):
-		self.custID = custID
-		self.ShipAdrID = ShipAdrID
-	
-	def __repr__(self):
-		return f"Order {self.ordID}: {self.custID} {self.ShipAdrID}"
+    ordID = db.Column(db.Integer, primary_key=True)
+    custID = db.Column(db.Integer)
+    ShipAdrID = db.Column(db.Integer)
+
+    def __init__(self, custID, ShipAdrID):
+        self.custID = custID
+        self.ShipAdrID = ShipAdrID
+
+    def __repr__(self):
+        return f"Order {self.ordID}: {self.custID} {self.ShipAdrID}"
+
 
 class OrderContents(db.Model):
     ordID = db.Column(db.Integer, primary_key=True)

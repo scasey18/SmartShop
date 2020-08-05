@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 login = LoginManager(app)
 
+
 db_name = 'sample.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -43,20 +44,16 @@ def homepage():
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
-	if request.method=="POST":
-		req=dict(request.form)
-		if "remove" in req:
-			removeFromCart(current_user.get_id(),req['remove'])
-		else:
-			k = list(req.keys())[0]
-			updateCart(current_user.get_id(), k, int(req[k]))
-	if current_user.is_authenticated:
-		cart=getCart(current_user.get_id())
-		prods=[]
-		for i in cart:
-			prods.append(Product.query.filter_by(prodID=i.prodID).first())
-		return render_template('cart.html', user=current_user, cart=len(cart), contents=cart, prods=prods)
-	return render_template('cart.html')
+    if request.method == "POST":
+        removeFromCart(current_user.get_id(), request.form.get('remove'))
+    if current_user.is_authenticated:
+        cart = getCart(current_user.get_id())
+        prods = []
+        for i in cart:
+            prods.append(Product.query.filter_by(prodID=i.prodID).first())
+        return render_template('cart.html', user=current_user, cart=len(cart), contents=cart, prods=prods)
+    return render_template('cart.html')
+
 
 @app.route('/store', methods=['GET', 'POST'])
 def store():
@@ -112,15 +109,14 @@ def signup():
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-	if current_user.is_authenticated:
-		if request.method == "POST":
-			req = dict(request.form)
-			adr = addAddress(req['street'],req['suite'],req['state'], req['country'],req['zip'])
-			checkoutCart(current_user.get_id(), adr.adrID)
-			return redirect(url_for('sales_thankyou'))
-		cart = getCart(current_user.get_id())
-		return render_template('checkout.html', user=current_user, adr=getAddress(current_user.defAdr), cart=len(cart), content = getCartContents(cart))
-	return render_template('checkout.html')
+    if current_user.is_authenticated:
+        if request.method == "POST":
+            checkoutCart(current_user.get_id(), 1)
+            return redirect(url_for('sales_thankyou'))
+        cart = getCart(current_user.get_id())
+        return render_template('checkout.html', user=current_user, cart=len(cart), content=cart)
+    return render_template('checkout.html')
+
 
 @app.route('/thank_you')
 def sales_thankyou():
@@ -128,10 +124,22 @@ def sales_thankyou():
         return render_template('sales_thankyou.html', user=current_user, cart=len(getCart(current_user.get_id())))
     return render_template('sales_thankyou.html')
 
-@app.route('/product/<int:prodID>', methods=['GET', 'POST'])
+
+# @app.route('/product', methods=['GET', 'POST'])
+# def product():
+#     jsdata = ""
+#     if request.method == 'POST':
+#         req = dict(request.form)
+#     if current_user.is_authenticated:
+#         return render_template('product.html', user=current_user, products=Product.query.all(), productid=req['productid'])
+#     return render_template('product.html', products=Product.query.all(), productid=req['productid'])
+
+
+@app.route('/product/<int:prodID>')
 def product(prodID):
     if current_user.is_authenticated:
-        return render_template('product.html', prod=Product.query.get(prodID), user=current_user, cart=len(getCart(current_user.get_id())))
+        return render_template('product.html', prod=Product.query.get(prodID))
+
     return render_template('product.html', prod=Product.query.get(prodID))
 
 
