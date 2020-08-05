@@ -191,7 +191,7 @@ box-shadow: 10px 10px 20px 0px   #000;
            {% endif %}
 		<button>Add Rating</button>
         {% for rate in ratings %}
-        <br>\<input name="rateid" type='text' value ="{{rate.rateID}}">
+        <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
           <h6 class="cfont stock">Customer :{{rate.custID}}</h6>
           <h6 class="cfont stock">Rating :{{rate.rating}}</h6>
           <h6 class="cfont stock">Comments :{{rate.comment}}</h6>
