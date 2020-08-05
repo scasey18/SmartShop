@@ -116,6 +116,9 @@ def checkout():
 		if request.method == "POST":
 			req = dict(request.form)
 			adr = addAddress(req['street'],req['suite'],req['state'], req['country'],req['zip'])
+			if "saveAddress" in req and req['saveAddress'] == 'on':
+				current_user.defAdr = adr.adrID
+				db.session.commit()
 			checkoutCart(current_user.get_id(), adr.adrID)
 			return redirect(url_for('sales_thankyou'))
 		cart = getCart(current_user.get_id())
@@ -131,8 +134,8 @@ def sales_thankyou():
 @app.route('/product/<int:prodID>', methods=['GET', 'POST'])
 def product(prodID):
     if current_user.is_authenticated:
-        return render_template('product.html', prod=Product.query.get(prodID), user=current_user, cart=len(getCart(current_user.get_id())))
-    return render_template('product.html', prod=Product.query.get(prodID))
+        return render_template('product.html', prod=Product.query.get(prodID),ratings=getAllRatings(prodID), user=current_user, cart=len(getCart(current_user.get_id())))
+    return render_template('product.html', prod=Product.query.get(prodID), ratings=getAllRatings(prodID))
 
 
 @app.route('/login', methods=['GET', 'POST'])
