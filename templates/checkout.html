@@ -2,10 +2,11 @@
 {%  block title %}Checkout{%    endblock    %}
 
  {%  block styles   %}
- <!-- <link rel="stylesheet" href="{{url_for('static', filename='styles/checkout.css')}}"> -->
-<style >
+<link rel="stylesheet" href="{{url_for('static',filename='styles/checkout.css')}}">
+<script src="{{ url_for('static',filename='js/checkout.js') }}"></script>
+<style>
 body{
-     background-image: url("static/images/loginBackground.jpg");
+     background-image: linear-gradient(to right, #DCDCDC, #696969);
     background-size: 100%;
 }
     .bg{
@@ -32,7 +33,6 @@ body{
 
 {%  block content   %}
 <!--Main layout-->
-<p>{{request.path}}</p>
  <main class="container-fluid  bg" >
    <div class="container">
      <!-- Heading -->
@@ -49,43 +49,36 @@ body{
                <div class="col-md-6 mb-1">
                  <!--firstName-->
                  <div class="md-form ">
-                   <input type="text" id="firstName" class="form-control" required>
+                   <input type="text" id="firstName" class="form-control" value="{{user.fName}}" required>
                    <label for="firstName" class="">First name</label>
                  </div>
                </div>
                <div class="col-md-6 mb-2">
                  <!--lastName-->
                  <div class="md-form">
-                   <input type="text" id="lastName" class="form-control" required>
+                   <input type="text" id="lastName" class="form-control" value="{{user.lName}}" required>
                    <label for="lastName" class="">Last name</label>
                  </div>
                </div>
              </div>
-             <!--Username-->
-             <!-- <div class="md-form input-group pl-0 mb-5">
-               <div class="input-group-prepend">
-                 <span class="input-group-text" id="basic-addon1">@</span>
-               </div>
-               <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
-             </div> -->
              <!--email-->
              <div class="md-form mb-2">
-               <input type="text" id="email" class="form-control" placeholder="youremail@example.com" required>
+               <input type="text" id="email" class="form-control" placeholder="{{user.emailAdr}}" required>
                <label for="email" class="">E-mail</label>
              </div>
              <!--address-->
              <div class="md-form mb-2">
-               <input type="text" id="address" class="form-control" placeholder="1234 Main St">
+               <input type="text" name="street" id="address" class="form-control" placeholder="{{adr.street}}">
                <label for="address" class="">Shipping Address</label>
              </div>
              <!--address-2-->
-             <!-- <div class="md-form mb-5">
-               <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
+             <div class="md-form mb-5">
+               <input type="text" id="address-2" name="suite" class="form-control" placeholder="{{adr.suite}}">
                <label for="address-2" class="">Address 2 (optional)</label>
-             </div> -->
+             </div>
              <div class="row">
                <div class="col-lg-4 col-md-12 mb-2">
-                 <select class="custom-select d-block w-100" id="country" required>
+                 <select class="custom-select d-block w-100" name="country" id="country" required>
                    <!-- <option value="">Choose...</option> -->
                    <option  value="US">United States</option>
                  </select>
@@ -95,7 +88,7 @@ body{
                  </div>
                </div>
                <div class="col-lg-4 col-md-6 mb-2">
-                 <select class="custom-select d-block w-100" id="state" required>
+                 <select class="custom-select d-block w-100" id="state" name="state" required>
                      <option value="none">Choose...</option>
                      <option value="AL">Alabama</option>
                      <option value="AK">Alaska</option>
@@ -154,7 +147,7 @@ body{
                  </div>
                </div>
                <div class="col-lg-4 col-md-6 mb-2">
-                 <input type="text" class="form-control" id="zip" placeholder="" required>
+                 <input type="text" class="form-control" id="zip" placeholder="{{adr.zip}}" name="zip" required>
                  <label for="zip">Zip</label>
                  <div class="invalid-feedback">
                    Zip code required.
@@ -324,32 +317,20 @@ body{
          <!-- Heading -->
          <h4 class="d-flex justify-content-between align-items-center mb-3">
            <span class="text-muted">Your cart</span>
-           <span class="badge badge-secondary badge-pill">3</span>
+           <span class="badge badge-secondary badge-pill">{{cart}}</span>
          </h4>
 
          <!-- Cart -->
          <ul class="list-group mb-3 z-depth-1">
-           <li class="list-group-item d-flex justify-content-between lh-condensed">
-             <div>
-               <h6 class="my-0">Product name</h6>
-               <small class="text-muted">Brief product description</small>
-             </div>
-             <span class="text-muted">$12</span>
-           </li>
-           <li class="list-group-item d-flex justify-content-between lh-condensed">
-             <div>
-               <h6 class="my-0">Second product</h6>
-               <small class="text-muted">Brief product description</small>
-             </div>
-             <span class="text-muted">$8</span>
-           </li>
-           <li class="list-group-item d-flex justify-content-between lh-condensed">
-             <div>
-               <h6 class="my-0">Third item</h6>
-               <small class="text-muted">Brief product description</small>
-             </div>
-             <span class="text-muted">$5</span>
-           </li>
+			{% for i in content %}
+			   <li class="list-group-item d-flex justify-content-between lh-condensed">
+				 <div>
+				   <h6 class="my-0">{{i[1]}} x {{i[0].name}}</h6>
+				   <small class="text-muted">{{i[0].desc}}</small>
+				 </div>
+				 <span class="text-muted">{{i[0].price * i[1]}}</span>
+			   </li>
+            {% endfor %}
            <!-- <li class="list-group-item d-flex justify-content-between bg-light">
              <div class="text-success">
                <h6 class="my-0">Promo code</h6>
@@ -359,7 +340,7 @@ body{
            </li> -->
            <li class="list-group-item d-flex justify-content-between">
              <span>Total (USD)</span>
-             <strong>$25</strong>
+             <strong>0.00</strong>
            </li>
          </ul>
          <!-- Cart -->
