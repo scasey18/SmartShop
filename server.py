@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import LoginManager, current_user, login_user, logout_user
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField,  SelectField
 
 from dbtools import *
 from tables import *
@@ -8,6 +10,7 @@ from tables import *
 app = Flask(__name__)
 
 login = LoginManager(app)
+
 
 db_name = 'sample.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
@@ -54,18 +57,18 @@ def cart():
     return render_template('cart.html')
 
 
-@app.route('/store', methods=['GET', 'POST'])
-def store():
-    if request.method == "POST":
-        req = dict(request.form)
-        res = addtoCart(current_user.get_id(), req['id'], req['quan'])
-        if res == -1:
-            return str(-1)
-        return str(len(getCart(current_user.get_id())))
-    if current_user.is_authenticated:
-        prods = Product.query.all()
-        return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
-    return render_template('store.html', products=Product.query.all())
+# @app.route('/store', methods=['GET', 'POST'])
+# def store():
+#     if request.method == "POST":
+#         req = dict(request.form)
+#         res = addtoCart(current_user.get_id(), req['id'], req['quan'])
+#         if res == -1:
+#             return str(-1)
+#         return str(len(getCart(current_user.get_id())))
+#     if current_user.is_authenticated:
+#         prods = Product.query.all()
+#         return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
+#     return render_template('store.html', products=Product.query.all())
 
 
 @app.route('/about')
@@ -124,17 +127,30 @@ def sales_thankyou():
     return render_template('sales_thankyou.html')
 
 
-# @app.route('/product', methods=['GET', 'POST'])
-# def product():
-#     jsdata = ""
-#     if request.method == 'POST':
-#         req = dict(request.form)
-#     if current_user.is_authenticated:
-#         return render_template('product.html', user=current_user, products=Product.query.all(), productid=req['productid'])
-#     return render_template('product.html', products=Product.query.all(), productid=req['productid'])
+@app.route('/store', methods=['GET', 'POST'])
+def store():
+    if request.method == "POST":
+        req = dict(request.form)
+        res = addtoCart(current_user.get_id(), req['id'], req['quan'])
+        if res == -1:
+            return str(-1)
+        return str(len(getCart(current_user.get_id())))
+        if current_user.is_authenticated:
+            prods = Product.query.all()
+            return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
+    else:
+        if request.args.get('item') == "filter":
+            selectValue = request.args.get("myitems")
+            if selectValue != "All":
+                prods = Product.query.filter(Product.name == selectValue).all()
+                return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
+            else:
+                prods = Product.query.all()
+                return render_template('store.html', user=current_user, products=prods, cart=len(getCart(current_user.get_id())))
+    return render_template('store.html', products=Product.query.all())
 
 
-@app.route('/product/<int:prodID>')
+@ app.route('/product/<int:prodID>')
 def product(prodID):
     if current_user.is_authenticated:
         return render_template('product.html', prod=Product.query.get(prodID))
@@ -142,7 +158,7 @@ def product(prodID):
     return render_template('product.html', prod=Product.query.get(prodID))
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@ app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('account'))
@@ -160,7 +176,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/admin', methods=['GET', 'POST'])
+@ app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
         req = dict(request.form)
@@ -186,7 +202,7 @@ def admin():
     return redirect(url_for('login'))
 
 
-@app.route('/account', methods=['GET', 'POST'])
+@ app.route('/account', methods=['GET', 'POST'])
 def account():
     if request.method == "POST" and current_user.is_authenticated:
         req = dict(request.form)
@@ -196,7 +212,7 @@ def account():
     return redirect(url_for('login'))
 
 
-@app.errorhandler(404)
+@ app.errorhandler(404)
 def error404(error):
     if current_user.is_authenticated:
         return render_template('404.html', user=current_user, cart=len(getCart(current_user.get_id())))

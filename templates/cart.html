@@ -5,13 +5,6 @@
 {% block styles %}
 <style type="text/css">
 
-/* .container-fluid{
-    background-image: url("static/images/loginBackground.jpg");
-    width: 100%;
-    height: 100vh;
-     background-size: 100%;
-} */
-
 
 body{
      background: linear-gradient(to right, #DCDCDC, #696969);
@@ -52,17 +45,6 @@ input, button{
 
 <script>
 
-        // $(document).ready(function () {
-        //   $('#positive').click(function () {
-        //       $('input').val(parseInt( $('input').val()) + 1);
-        //   });
-        //   $('#negative').click(function () {
-        //     $('input').val(parseInt( $('input').val()) - 1);
-        //     if ($('input').val() < 0){
-        //         $('input').val("0");
-        //     }
-        //   });
-        //   });
 </script>
 {% endblock %}
 
@@ -94,14 +76,6 @@ input, button{
                                         class="img-thumbnail img-sm"></div>
                                 <figcaption class="media-body">
                                     <h6 class="title text-truncate">{{product.name}}</h6>
-                                   <!--  <dl class="param param-inline small">
-                                        <dt>Size: </dt>
-                                        <dd>200 lbs</dd>
-                                    </dl>
-                                    <dl class="param param-inline small">
-                                        <dt>Color:</dt>
-                                        <dd>Blue color</dd>
-                                    </dl> -->
                                 </figcaption>
                             </figure>
                         </td>
@@ -111,7 +85,6 @@ input, button{
 									<option>{{i}}</option>
 								{% endfor %}
                             </select>
-                                <!-- <input type="number" value="1" min="0" max="1000" step="1"/> -->
                         </td>
                         <td>
                             <div class="price-wrap">
@@ -120,8 +93,6 @@ input, button{
                             </div>
                         </td>
                         <td class="text-right">
-                            <!-- <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                                data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a> -->
 							<form action='{{request.path}}' method='post'>
 								<button type='submit' class="btn btn-outline-danger" name='remove' value={{product.prodID}}> × Remove</button>
 							</form>

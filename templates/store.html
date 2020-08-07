@@ -52,8 +52,10 @@
 
     .container {
         width: 100%;
+        /* height: 100%; */
         margin-top: 2%;
         letter-spacing: 1px;
+        min-height: 100vh
     }
     /*End Filter Button Styles*/
 
@@ -62,6 +64,8 @@
         width: 100%;
         height: 100vh;
         background-size: 100%;
+
+
     }
 
     .container h2 {
@@ -120,24 +124,76 @@
         color: #008B8B;
         font-size: 20px;
     }
+
+    form {
+      display: flex;
+      align-items: center;
+    }
+ .filterButton{
+  font-size: 20px;
+  display: block;
+  width: 200px;
+}
+
+.filterButton input.tnp-submit {
+  background: #008B8B;
+  color: #fff;
+  width: 58px;
+  height: 38px;
+}
 </style>
 
 {% endblock %} {% block content %}
-
 <div class="container">
     <h2>Our Catalog</h2>
     <div class="filterButton">
-        <button onclick="filterFunction()" class="dropbtn">Filter</button>
-        <div id="myFilter" class="filterContent">
-            <a href="#">Price lo-high</a>
-            <a href="#">Price hi-low</a>
-            <a href="#">Tops</a>
-            <a href="#">Pants</a>
-            <a href="#">Rating</a>
-            <a href="#">Availability</a>
-        </div>
+        <h6><b>Filter items by category</b></h6>
+        <form    action='{{ request.path }}' method="GET">
+        <select class="custom-select d-block w-100"   name = "myitems" >
+            <option value="All">All category</option>
+            <option value="Backpack">Backpack</option>
+            <option value="Briefcase">Briefcase</option>
+            <option value="Bag">Bag</option>
+            <option value="Shoe">Shoe</option>
+            <option value="Boot">Boot</option>
+            <option value="Sneaker">Sneaker</option>
+            <option value="Flats">Flats</option>
+            <option value="Sandal">Sandal</option>
+            <option value="Polo">Polo</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Sweater">Sweater</option>
+            <option value="Jacket">Jacket</option>
+            <option value="Short">Short</option>
+            <option value="Pants">Pants</option>
+            <option value="Sweatshirt">Sweatshirt</option>
+        </select>
+        <div><Input type="submit"  name="item" value="filter" class="tnp-submit"></div>
+    </form>
     </div>
+
     <script>
+
+    //         let prod_name_select = document.getElementById('prod_name');
+    //
+    //             prod_name_select.onchange = function(){
+    //                 prod_name = prod_name_select.value;
+    // }
+            // let prod_name_select = document.getElementById('prod_name');
+            //
+            // prod_name_select.onchange = function(){
+            //     prod_name = prod_name_select.value;
+            //
+            //     fetch('/prod_fields/' + prod_name).then(function(response){
+            //         response.json().then(function(data){
+            //
+            //             for (let field of data.fields)
+            //         });
+            //     });
+            // }
+
+
+
+
         /* Script for the filter dropdown */
         function filterFunction() {
             document.getElementById("myFilter").classList.toggle("show");
