@@ -30,11 +30,6 @@ box-shadow: 10px 10px 20px 0px   #000;
 .product-image, img{
         height:770px!important;
         border-radius: 40px;
-<<<<<<< HEAD
-        border: 10px solid #555; 
-=======
-        border: 10px solid #555;
->>>>>>> DatetimeUrl
     }
 
 .mt-5, .my-5 {
@@ -132,7 +127,6 @@ box-shadow: 10px 10px 20px 0px   #000;
         else {
           document.getElementById("cart-item").textContent=data;
           document.getElementById("shopping-cart-item").textContent=data;
-          console.log(data);
         }
       });
     }
@@ -156,7 +150,7 @@ box-shadow: 10px 10px 20px 0px   #000;
                  <img class="productImage" src="{{url_for('static',  filename=productPath)}}">
                     <div class="overlay">
                         <button type="button" class="btn btn-secondary purchasebutt" title="Add to Cart" onclick="addCart({{prod.prodID}})"><i class ="fa fa-shopping-cart"></i></button>
-                        <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
+                       <!--  <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button> -->
                     </div>
                 </div>
 
@@ -189,7 +183,7 @@ box-shadow: 10px 10px 20px 0px   #000;
             
       </div>  
            {% endif %}
-		<button>Add Rating</button>
+		<!-- <button>Add Rating</button>
         {% for rate in ratings %}
         <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
           <h6 class="cfont stock">Customer :{{rate.custID}}</h6>
@@ -197,7 +191,7 @@ box-shadow: 10px 10px 20px 0px   #000;
           <h6 class="cfont stock">Comments :{{rate.comment}}</h6>
           
         {% endfor %}
-
+ -->
 
       </div>
 </div>
