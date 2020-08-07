@@ -126,26 +126,31 @@
 				</form>
             </div>
             <div class="billing tabShow">
-                <h1><b>Billing Address</b></h1>
-                <h2>Address </h2>
-                <input type="text" class="input" value="Address">
+				<form action="{{request.path}}" method="POST">
+					<h1><b>Billing Address</b></h1>
+					{% if adr != None %}
+					<button type="submit" class="btn" name="reset" value="address">Reset Address</button>
+					{% endif %}
+					<h2>Address </h2>
+					<input type="text" class="input" name="street" value="{{adr.street}}">
 
-                <h2>Zip Code</h2>
-                <input type="text" class="input" value="Zip-Code">
-                
-                <h2>City</h2>
-                <input type="text" class="input" value="State">
-               
-                <h2>State</h2>
-                <input type="text" class="input" value="State">
-               
-                <h2>Suite/APT</h2>
+					<h2>Zip Code</h2>
+					<input type="text" class="input" name="zip" value="{{adr.zip}}">
+					
+					<!-- <h2>City</h2>
+					<input type="text" class="input" value="{{adr.city}}"> -->
+				   
+					<h2>State</h2>
+					<input type="text" class="input" name="state" value="{{adr.state}}">
+				   
+					<h2>Suite/APT</h2>
 
-                <input type="text" class="input" value="Suite/APT">
-                <br>
-                <br>
-                <button type="submit" class="btn" name="update" value='profile'>Update</button>
-                <!-- <button class="btn">Update</button> -->
+					<input type="text" class="input" name="suite" value="{{adr.suite}}">
+					<br>
+					<br>
+					<button type="submit" class="btn" name="update" value='address'>Update</button>
+					<!-- <button class="btn">Update</button> -->
+				</form>
             </div>
 			<br><br>
             <!-- <div class="settings tabShow">
