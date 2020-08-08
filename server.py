@@ -4,6 +4,10 @@ from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField,  SelectField
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
 from dbtools import *
 from tables import *
 
@@ -79,7 +83,6 @@ def contact():
 def signup_thankyou():
 	return render_template('signup_thankyou.html')
 
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 	if current_user.is_authenticated:
@@ -98,7 +101,6 @@ def signup():
 		return render_template('signup.html', error=error)
 	return render_template('signup.html')
 
-
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
 	if current_user.is_authenticated:
@@ -109,6 +111,20 @@ def checkout():
 				current_user.defAdr = adr.adrID
 				db.session.commit()
 			checkoutCart(current_user.get_id(), adr.adrID)
+			sender = 'shopsmartcs421@gmail.com'
+			customer_email = User.query.get(current_user.get_id()).emailAdr
+			customer_name = User.query.get(current_user.get_id()).fName
+			customer_address = Address.query.get(adr.adrID).street
+			msg = MIMEMultipart()
+			msg['From'] = sender
+			msg['To'] = customer_email
+			msg['Subject'] = 'Order Confirmation'
+			body = "Hi {0}! Thank you for your purchase.\nGood news! Your order was successfully placed! Your order will ship to {1}.\nThank you for Shopping with us and please come back again!".format(customer_name, customer_address)
+			msg.attach(MIMEText(body, 'html'))
+			server = smtplib.SMTP('smtp.gmail.com', 587)
+			server.starttls()
+			server.login(sender, "Sh0pSm@rT")
+			server.sendmail(sender, customer_email, msg.as_string())
 			return redirect(url_for('sales_thankyou'))
 		cart = getCart(current_user.get_id())
 		return render_template('checkout.html', user=current_user, adr=getAddress(current_user.defAdr), cart=len(cart), content = getCartContents(cart))
