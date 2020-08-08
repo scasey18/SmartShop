@@ -31,7 +31,6 @@ box-shadow: 10px 10px 20px 0px   #000;
         height:770px!important;
         border-radius: 40px;
         border: 10px solid #555; 
-    }
 
 .mt-5, .my-5 {
   margin-top: 4rem!important;
@@ -129,7 +128,6 @@ font-size: 1.6rem;
         else {
           document.getElementById("cart-item").textContent=data;
           document.getElementById("shopping-cart-item").textContent=data;
-          console.log(data);
         }
       });
     }
@@ -153,7 +151,7 @@ font-size: 1.6rem;
                  <img class="productImage" src="{{url_for('static',  filename=productPath)}}">
                     <div class="overlay">
                         <button type="button" class="btn btn-secondary purchasebutt" title="Add to Cart" onclick="addCart({{prod.prodID}})"><i class ="fa fa-shopping-cart"></i></button>
-                        <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
+                       <!--  <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button> -->
                     </div>
                 </div>
 
@@ -186,15 +184,15 @@ font-size: 1.6rem;
             
       </div>  
            {% endif %}
-
+		<!-- <button>Add Rating</button>
         {% for rate in ratings %}
         <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
           <h6 class="cfont stock">Customer :{{rate.custID}}</h6>
           <h6 class="cfont stock">Rating :{{rate.rating}}</h6>
-          <h6 class="cfont stock">Comments :{{rate.comments}}</h6>
+          <h6 class="cfont stock">Comments :{{rate.comment}}</h6>
           
         {% endfor %}
-
+ -->
 
       </div>
 </div>

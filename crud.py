@@ -25,6 +25,9 @@ def updateCustomer(id, fname, lname, email, pwd):
 def getRating(prodID):
 	return Rating.query.filter(prodID = prodID).first()
 	
+def getAllRatings(prodID):
+	return Rating.query.filter_by(prodID = prodID).all()
+	
 def getCart(custID):
 	return Cart.query.filter_by(custID=custID).all()
 

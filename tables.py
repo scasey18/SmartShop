@@ -2,6 +2,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from flask_login import UserMixin
 
+import random 
+import string
+
 db = SQLAlchemy()
 
 
@@ -70,14 +73,15 @@ class Address(db.Model):
 
 class Orders(db.Model):
 	ordID = db.Column(db.Integer, primary_key=True)
-	#confirmNum = db.Column(db.Integer, unique=True)
+	confirmNum = db.Column(db.Text)
 	custID = db.Column(db.Integer)
 	ShipAdrID = db.Column(db.Integer)
 	
 	def __init__(self, custID, ShipAdrID):
 		self.custID = custID
 		self.ShipAdrID = ShipAdrID
-	
+		self.confirmNum = ''.join([random.choice(string.ascii_uppercase + string.digits) for i in range(20)])
+		
 	def __repr__(self):
 		return f"Order {self.ordID}: {self.custID} {self.ShipAdrID}"
 
