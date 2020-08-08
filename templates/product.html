@@ -30,12 +30,16 @@ box-shadow: 10px 10px 20px 0px   #000;
 .product-image, img{
         height:770px!important;
         border-radius: 40px;
+<<<<<<< HEAD
         border: 10px solid #555; 
+=======
+        border: 10px solid #555;
+>>>>>>> DatetimeUrl
     }
 
 .mt-5, .my-5 {
   margin-top: 4rem!important;
-  background: #333; 
+  background: #333;
 }
 
 .row {
@@ -58,7 +62,33 @@ box-shadow: 10px 10px 20px 0px   #000;
   font-size: 6rem;
   color: white;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;    
+  -webkit-text-stroke-color: black;
+}
+
+.purchasebutt {
+  width: 20%;
+  background: #008B8B;
+}
+
+.review {
+  color: #008B8B ;
+  size: 10rem;
+}
+
+.prodname {
+  font-size: 3rem;
+}
+
+.ddate {
+  font-size: 1.3rem;
+}
+
+.stock {
+  font-size: 1.4rem;
+}
+
+#spn{
+    color: white;
 }
 
 .purchasebutt {
@@ -108,37 +138,30 @@ box-shadow: 10px 10px 20px 0px   #000;
     }
     
 </script>
-
 {% endblock %}
 
 {%  block content   %}
 
-
-
 <div class="container-fluid bg">
   <div class="container mt-5 kg">
-<!-- <h2 class="text-center mb-5 smrt cfont">ShopSmart</h2> -->
+
 <h1 class = "text-center titlehead text-uppercase cfont titlehead"><b>Shop Smart</b></h1>
 <br>
   <div class="container ">
     <div class="row">
-
-        {% for prod in products %}
-           {% if prod.prodID|string == productid|string %}
-
+        {% if prod %}
+           {% set productPath = 'stocks' ~ '/' ~ prod.prodID ~ '.jpg' %}
 
              <div class="product-top text-center">
-                    <img class="productImage" src="static/stocks/{{prod.prodID}}.jpg">
+                 <img class="productImage" src="{{url_for('static',  filename=productPath)}}">
                     <div class="overlay">
                         <button type="button" class="btn btn-secondary purchasebutt" title="Add to Cart" onclick="addCart({{prod.prodID}})"><i class ="fa fa-shopping-cart"></i></button>
                         <button type="button" class="btn btn-secondary purchasebutt" title="Drop a Rating!"><i class="fa fa-heart"></i></button>
-
                     </div>
                 </div>
-                <div class="product-bottom text-center">
-                   
-                </div>
-        <div class="col-md-6 text-center">
+
+        <div class="col-md-6 text-center ">
+
           <br>
           <br>
           <br>
@@ -147,21 +170,15 @@ box-shadow: 10px 10px 20px 0px   #000;
           <br>
           <br>
           <br>
-          <!-- <div class="row"> -->
-            <h1 class="cfont prodname"><i ></i>{{prod.name}}<!-- </h1>&nbsp;&nbsp;<h3>
-            </h3>&nbsp;&nbsp; -->
-           <!--  <div class="row"> -->
-            <p><i class="text-success far"></i><strong>&nbsp;</strong>&nbsp;
-             </p>
-         <!--  </div> -->
-        <!-- </div> -->
-            <h3 class = "fas fa-dollar-sign cfont">{{prod.price}}</h4>
+            <h1 class="cfont prodname"><i ></i>{{prod.name}}</h1>
+            <p><i class="text-success far"></i><strong>&nbsp;</strong>&nbsp;</p>
+
+            <h3 class = "fas fa-dollar-sign cfont">{{prod.price}}</h3>
               <br><br>
-           <h4 class = "cfont">{{prod.desc}}</h3>
+           <h4 class = "cfont">{{prod.desc}}</h4>
             <br>
            <h6 class="cfont stock">Stock :{{prod.curinv}}</h6>
            <br>
-          
             <h3 class="text-info"><i class="fas fa-map-marker-alt"></i></h3>
                 <span class="text-success ddate"> &nbsp; Delivery by &nbsp; </span> <span id="spn"></span> <span class="text-success ddate"> | FREE</span>
                 <br>
@@ -172,7 +189,6 @@ box-shadow: 10px 10px 20px 0px   #000;
             
       </div>  
            {% endif %}
-        {% endfor %}
 
         {% for rate in ratings %}
         <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
@@ -181,12 +197,13 @@ box-shadow: 10px 10px 20px 0px   #000;
           <h6 class="cfont stock">Comments :{{rate.comments}}</h6>
           
         {% endfor %}
+
+
       </div>
-
 </div>
 </div>
 
 </div>
- </div>
-</html>
+</div>
+
 {%  endblock    %}
