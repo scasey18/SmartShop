@@ -31,6 +31,7 @@ box-shadow: 10px 10px 20px 0px   #000;
         height:770px!important;
         border-radius: 40px;
         border: 10px solid #555; 
+    }
 
 .mt-5, .my-5 {
   margin-top: 4rem!important;
@@ -84,11 +85,10 @@ box-shadow: 10px 10px 20px 0px   #000;
 
 #spn{
     color: white;
-font-size: 1.6rem;
 }
 
 .purchasebutt {
-  width: 20%;
+  width: 40%;
   background: #008B8B;
 }
 
@@ -128,6 +128,7 @@ font-size: 1.6rem;
         else {
           document.getElementById("cart-item").textContent=data;
           document.getElementById("shopping-cart-item").textContent=data;
+          console.log(data);
         }
       });
     }
@@ -175,30 +176,30 @@ font-size: 1.6rem;
            <h6 class="cfont stock">Stock :{{prod.curinv}}</h6>
            <br>
             <h3 class="text-info"><i class="fas fa-map-marker-alt"></i></h3>
-                <span class="text-success ddate"> &nbsp; Delivery by &nbsp; </span> <span id="spn"></span> <span class="text-success ddate"> | FREE</span>
+                <span class="text-success ddate"> &nbsp; Delivery by &nbsp; </span> <span class = "ddate" id="spn"></span> <span class="text-success ddate"> | FREE</span>
                 <br>
                 <br>
-            {% for _ in range(0,prod.rating|int) %}
-          <i class="fa fa-star fa-2x review"></i>
-                {% endfor %}
+            <!-- {% for _ in range(0,prod.rating|int) %} -->
+          <!-- <i class="fa fa-star fa-2x review"></i> -->
+                <!-- {% endfor %} -->
             
       </div>  
-           {% endif %}
-		<!-- <button>Add Rating</button>
-        {% for rate in ratings %}
+          <!--  {% endif %} -->
+
+        <!-- {% for rate in ratings %}
         <br>\<input name="rateid" type='text' value ="{{rate.rateID}}" hidden=true>
           <h6 class="cfont stock">Customer :{{rate.custID}}</h6>
           <h6 class="cfont stock">Rating :{{rate.rating}}</h6>
-          <h6 class="cfont stock">Comments :{{rate.comment}}</h6>
-          
-        {% endfor %}
- -->
+          <h6 class="cfont stock">Comments :{{rate.comments}}</h6>
+           -->
+        <!-- {% endfor %} -->
+
 
       </div>
 </div>
 </div>
 
 </div>
-</div>
+
 
 {%  endblock    %}
