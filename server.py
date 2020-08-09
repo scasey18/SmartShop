@@ -110,16 +110,16 @@ def checkout():
 			if "saveAddress" in req and req['saveAddress'] == 'on':
 				current_user.defAdr = adr.adrID
 				db.session.commit()
-			checkoutCart(current_user.get_id(), adr.adrID)
+			res = checkoutCart(current_user.get_id(), adr.adrID)
 			sender = 'shopsmartcs421@gmail.com'
-			customer_email = User.query.get(current_user.get_id()).emailAdr
-			customer_name = User.query.get(current_user.get_id()).fName
+			customer_email = current_user.emailAdr
+			customer_name = current_user.fName
 			customer_address = Address.query.get(adr.adrID).street
 			msg = MIMEMultipart()
 			msg['From'] = sender
 			msg['To'] = customer_email
 			msg['Subject'] = 'Order Confirmation'
-			body = "Hi {0}! Thank you for your purchase.\nGood news! Your order was successfully placed! Your order will ship to {1}.\nThank you for Shopping with us and please come back again!".format(customer_name, customer_address)
+			body = "Hi {0}! Thank you for your purchase.\nGood news! Your order was successfully placed! Your order will ship to {1}. Your confirmation number is {2}.\nThank you for Shopping with us and please come back again!".format(customer_name, customer_address, res.confirmNum)
 			msg.attach(MIMEText(body, 'html'))
 			server = smtplib.SMTP('smtp.gmail.com', 587)
 			server.starttls()

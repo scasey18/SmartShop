@@ -54,6 +54,7 @@
         width: 100%;
         margin-top: 2%;
         letter-spacing: 1px;
+		min-height: 100%;
     }
     /*End Filter Button Styles*/
 
@@ -149,7 +150,8 @@
 }
 </style>
 
-{% endblock %} {% block content %}
+{% endblock %} 
+{% block content %}
 <div class="container">
     <h2>Our Catalog</h2>
     <div class="filterButton">
@@ -225,9 +227,9 @@ function addCart(id) {
                 </div>
                 <div class="product-bottom text-center">
                     <p></p>
-                {% for _ in range(0,prod.rating|int) %}
+                <!-- {% for _ in range(0,prod.rating|int) %}
                     <i class="fa fa-star"></i>
-                {% endfor %}
+                {% endfor %} -->
                 <h6><b>{{prod.name}}</b></h6>
                 <h3>{{prod.desc}}</h3>
                 <h5><b>${{prod.price}}</b></h5>

@@ -50,9 +50,10 @@ def checkoutCart(custID, shipAdrID):
 	contents = []
 	for i in cart:
 		contents.append(OrderContents(res.ordID,i.prodID,i.quantity))
-		#Product.query.filter(prodID=i.prodID).first().curinv -= i.quantity
+		Product.query.filter_by(prodID=i.prodID).first().curinv -= i.quantity
 	db.session.add_all(contents)
 	emptyCart(custID)
+	return res
 		
 def setProdRating(prodID):
 	res = getRating(prodID)
