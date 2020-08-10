@@ -191,7 +191,7 @@ def admin():
 			if req["Customer"] == "Add":
 				addCustomer(req['fname'], req['lname'], req['email'], req['pwd'])
 			elif req["Customer"] == "Remove":
-				deleteCustomer(req['id'])
+				removeCustomer(req['id'])
 			elif req["Customer"] == "Update":
 				updateCustomer(req['id'], req['fname'], req['lname'], req['email'], req['pwd'])
 		elif "Product" in req:
